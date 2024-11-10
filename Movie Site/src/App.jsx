@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import MovieFetcher from './API/Data'
 import TopRatedMovies from './API'
+import TopRatedSeries from './part2'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
     <>
       <MovieFetcher />
       <TopRatedMovies />
+      <TopRatedSeries />
     </>
   )
 }

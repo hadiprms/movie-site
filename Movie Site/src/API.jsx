@@ -35,6 +35,7 @@ const TopRatedMovies = () => {
                 {movies.map(movie => (  
                     <li style={{ display: 'inline', alignItems: 'center' }}>
                         {movie.node.primaryImage && <img src={movie.node.primaryImage.url} alt={movie.node.primaryImage.url} style={{ width: '100px', marginRight: '10px' }} />}
+                        {/* <span>{movie.node.metacritic.metascore}</span> had problem in code.try to fix it */}
                         {/* <span>{movie.node.titleText.text}</span> have to set display for names to be under the images.when you do this uncommand this line. */}
                     </li>
                 ))}  
