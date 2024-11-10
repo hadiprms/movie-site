@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';  
+import DataQuery from './common/dataQuery';  
 
 const TopRatedMovies = () => {  
     const [movies, setMovies] = useState([]);  
@@ -6,34 +7,18 @@ const TopRatedMovies = () => {
     const [error, setError] = useState(null);  
 
     useEffect(() => {  
-        const fetchTopRatedMovies = async () => {  
-            const url = 'https://imdb8.p.rapidapi.com/title/get-top-rated-movies';  
-            const options = {  
-                method: 'GET',  
-                headers: {  
-                    'x-rapidapi-key': 'bb2d21c7demsh9eed1a51924e674p1acbd2jsn8487c9000313',
-                    'x-rapidapi-host': 'imdb8.p.rapidapi.com'  
-                }  
-            };  
-
+        const fetchMovies = async () => {  
             try {  
-                const response = await fetch(url, options);  
-                if (!response.ok) {  
-                    throw new Error(`HTTP error! status: ${response.status}`);  
-                }  
-                const result = await response.json();  
-                setMovies(result.slice(0, 6)); // Store only the top 6 movies  
-            } catch (error) {  
-                setError(error.message);  
+                const result = await DataQuery.fetchTopRatedMovies();  
+                setMovies(result.data.movies.edges);   
+            } catch (err) {  
+                setError(err.message || "Failed to fetch movies.");  
             } finally {  
-                setLoading(false); // Set loading to false whether it succeeded or failed  
+                setLoading(false);  
             }  
         };  
-        
-        
-
-        fetchTopRatedMovies();  
-    }, []); // Empty dependency array means this effect runs once on mount  
+        fetchMovies();  
+    }, []);  
 
     if (loading) {  
         return <div>Loading...</div>;  
@@ -45,12 +30,13 @@ const TopRatedMovies = () => {
 
     return (  
         <div>  
-            <h1>Top 6 Rated Movies</h1>  
+            <h1>Most popular on this week</h1>  
             <div id="top-movies">  
                 {movies.map(movie => (  
-                    <div key={movie.id} className="movie"> {/* Adjust this to match your movie object structure */}  
-                        {movie.title} {/* Assuming the movie object has a `title` property */}  
-                    </div>  
+                    <li style={{ display: 'inline', alignItems: 'center' }}>
+                        {movie.node.primaryImage && <img src={movie.node.primaryImage.url} alt={movie.node.primaryImage.url} style={{ width: '100px', marginRight: '10px' }} />}
+                        {/* <span>{movie.node.titleText.text}</span> have to set display for names to be under the images.when you do this uncommand this line. */}
+                    </li>
                 ))}  
             </div>  
         </div>  
