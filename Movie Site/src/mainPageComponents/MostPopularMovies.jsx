@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';  
 import DataQuery from '../common/dataQuery';
+import './cssFiles/MostPopularMovies.css'
 
 const TopRatedMovies = () => {  
     const [movies, setMovies] = useState([]);  
@@ -29,17 +30,30 @@ const TopRatedMovies = () => {
     }  
 
     return (  
-        <div>  
-            <h1>Most popular on this week</h1>  
-            <div id="top-movies">  
-                {movies.map(movie => (  
-                    <li style={{ display: 'inline', alignItems: 'center' }}>
-                        {movie.node.primaryImage && <img src={movie.node.primaryImage.url} alt={movie.node.primaryImage.url} style={{ width: '100px', marginRight: '10px' }} />}
-                        {/* <span>{movie.node.metacritic.metascore}</span> had problem in code.try to fix it */}
-                        {/* <span>{movie.node.titleText.text}</span> have to set display for names to be under the images.when you do this uncommand this line. */}
-                    </li>
-                ))}  
-            </div>  
+        <div className='All-moviesReturn'>  
+            <h1 className='titleHolder'>Most popular on this week:</h1>
+            <div className='element'>
+                {movies.map((movie) => {
+                    return(
+                        <div className='element-div'>
+                            <div className='image-container'>
+                                {movie.node.primaryImage && <img src={movie.node.primaryImage.url} alt={movie.node.primaryImage.url} style={{ width: '150px', height: '230px' , marginRight: '10px' }} className='movie-image' />}
+                                <div className='overlay'>                      
+                                    {movie.node.titleGenres.genres.slice(0, 1).map((gTitle) => (  
+                                            <div>
+                                                <p>{gTitle.genre.text}</p>
+                                            </div>
+                                        ))} 
+                                </div>
+                            </div>
+                            <div className='movieInfoHolder'>
+                            <p className='movieTitleText'>{movie.node.titleText.text}</p>
+                            <p>{movie.node.releaseYear.year} | <span className='ratingOfMovies'>{movie.node.ratingsSummary.aggregateRating} /10</span></p>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
         </div>  
     );  
 };  

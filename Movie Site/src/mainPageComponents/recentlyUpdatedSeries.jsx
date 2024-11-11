@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';  
-import DataQuery from '../common/dataQuery';  
+import DataQuery from '../common/dataQuery';
+import './cssFiles/recentlyUpdatedSeries.css'
 
 const TopRatedSeries = () => {  
     const [series, setSeries] = useState([]);  
@@ -29,17 +30,30 @@ const TopRatedSeries = () => {
     }  
 
     return (  
-        <div>  
-            <h1>Recently updated top series</h1>  
-            <div id="top-series">  
-                {series.map(tv => (  
-                    <li style={{ display: 'inline', alignItems: 'center' }}>
-                        {tv.node.primaryImage && <img src={tv.node.primaryImage.url} alt={tv.node.primaryImage.url} style={{ width: '100px', marginRight: '10px' }} />}
-                        {/* <span>{tv.node.metacritic.metascore}</span> had problem in code.try to fix it */}
-                        {/* <span>{tv.node.titleText.text}</span> have to set display for names to be under the images.when you do this uncommand this line. */}
-                    </li>
-                ))}  
-            </div>  
+        <div className='All-seriesReturn'>  
+            <h1 className='titleHolder'>Recently updated series:</h1>
+            <div className='element'>
+                {series.map((tv) => {
+                    return(
+                        <div className='element-div'>
+                            <div className='image-container'>
+                                {tv.node.primaryImage && <img src={tv.node.primaryImage.url} alt={tv.node.primaryImage.url} style={{ width: '150px' , height: '230px', marginRight: '10px' }} className='series-image' />}
+                                <div className='overlay'>                      
+                                    {tv.node.titleGenres.genres.slice(0, 1).map((gTitle) => (  
+                                            <div>
+                                                <p>{gTitle.genre.text}</p>
+                                            </div>
+                                        ))} 
+                                </div>
+                            </div>
+                            <div className='seriesInfoHolder'>
+                            <p className='seriesTitleText'>{tv.node.titleText.text}</p>
+                            <p>{tv.node.releaseYear.year} | <span className='ratingOfSeries'>{tv.node.ratingsSummary.aggregateRating} /10</span></p>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
         </div>  
     );  
 };  

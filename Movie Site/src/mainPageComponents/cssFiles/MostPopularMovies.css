@@ -1,0 +1,78 @@
+.element {  
+    display: grid;  
+    grid-template-columns: repeat(7, 1fr);  
+    align-items: center;  
+    justify-content: center;  
+    gap: 1rem;  
+}  
+.element-div {  
+    height: 200px;  
+    margin: 0px;  
+    padding: 20px;  
+    color: white;
+}  
+p {  
+    margin: 0 auto;  
+}  
+.image-container {  
+    position: relative;  
+}  
+.overlay {  
+    display: flex;
+    position: absolute;  
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%);  
+    background-color: black;  
+    color: white;  
+    padding: 10px;  
+    border-radius: 5px;  
+    font-size: 12px;  
+    font-weight: 600;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease; 
+}   
+.image-container:hover .overlay {  
+    opacity: 1;
+    visibility: visible; 
+}  
+.movie-image:hover {  
+    transform: scale(1.1);  
+    filter: blur(1px);  
+}  
+.movie-image {  
+    transition: transform 0.3s ease;  
+}   
+.overlay {  
+    pointer-events: none;
+}
+.movieInfoHolder{
+    text-align: center;
+}
+.movieInfoHolder .movieTitleText{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 140px;
+}
+.titleHolder{
+    font-size: 20px;
+    text-align: left;
+    font-weight: 500;
+    color: white;
+    /* margin-bottom: 2%;
+    margin-top: 5px;
+    margin-left: 20px; */
+    margin: 5px 0 15px 20px;
+}
+.All-moviesReturn{
+    border: 1px solid orange;
+    border-radius: 5px;
+    padding: 10px;
+    padding-bottom: 100px;
+    margin-bottom: 5%;
+}
+.ratingOfMovies{
+    color: orange;
+}

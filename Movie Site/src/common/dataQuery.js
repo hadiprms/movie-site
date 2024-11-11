@@ -20,11 +20,11 @@ class DataQuery {
         }
     }
     static async fetchTopRatedMovies(){
-        const result = await DataQuery.fetch('https://imdb8.p.rapidapi.com/title/v2/get-popular?first=6&country=US&language=en-US')
+        const result = await DataQuery.fetch('https://imdb8.p.rapidapi.com/title/v2/get-popular?first=7&country=US&language=en-US')
         return result;
     }
     static async fetchTopRatedSeries(){
-        const resultOfSeries = await DataQuery.fetch('https://imdb8.p.rapidapi.com/title/v2/get-popular?first=6&country=US&language=en-US')
+        const resultOfSeries = await DataQuery.fetch('https://imdb8.p.rapidapi.com/title/v2/get-popular?first=7&country=US&language=en-US')
         return resultOfSeries;
     }
 }
