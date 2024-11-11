@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';  
-import DataQuery from './common/dataQuery';  
+import DataQuery from '../common/dataQuery';  
 
 const TopRatedSeries = () => {  
     const [series, setSeries] = useState([]);  

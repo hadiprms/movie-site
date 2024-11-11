@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';  
-import DataQuery from './common/dataQuery';  
+import DataQuery from '../common/dataQuery';
 
 const TopRatedMovies = () => {  
     const [movies, setMovies] = useState([]);  
@@ -9,7 +9,7 @@ const TopRatedMovies = () => {
     useEffect(() => {  
         const fetchMovies = async () => {  
             try {  
-                const result = await DataQuery.fetchTopRatedMovies();  
+                const result = await DataQuery.fetchTopRatedMovies();
                 setMovies(result.data.movies.edges);   
             } catch (err) {  
                 setError(err.message || "Failed to fetch movies.");  

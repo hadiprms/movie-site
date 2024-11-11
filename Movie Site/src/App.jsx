@@ -2,15 +2,15 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import MovieFetcher from './API/Data'
-import TopRatedMovies from './API'
-import TopRatedSeries from './part2'
+import Fetcher from './mainPageComponents/searchBar'
+import TopRatedMovies from './mainPageComponents/MostPopularMovies'
+import TopRatedSeries from './mainPageComponents/recentlyUpdatedSeries'
 
 function App() {
 
   return (
     <>
-      <MovieFetcher />
+      <Fetcher />
       <TopRatedMovies />
       <TopRatedSeries />
     </>
