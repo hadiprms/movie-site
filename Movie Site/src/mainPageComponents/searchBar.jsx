@@ -1,29 +1,20 @@
 import React, { useState } from "react";  
+import { searchMoviesFetch } from "../common/searchDataQuery";
 
 const Fetcher = () => {  
-    const [query, setQuery] = useState("");
-    const [data, setData] = useState([]);
+    const [query, setQuery] = useState("");  
+    const [data, setData] = useState([]);  
 
-    async function fetchData() {  
-        if (!query) return;
-
-        const url = `https://imdb8.p.rapidapi.com/auto-complete?q=${encodeURIComponent(query)}`;  
-        const options = {  
-            method: 'GET',  
-            headers: {  
-                'x-rapidapi-key': 'fcbb3addc9msh1e373a7cd345f32p1ebc34jsnc74392565253', 
-                'x-rapidapi-host': 'imdb8.p.rapidapi.com'  
-            }  
-        };  
+    const fetchData = async () => {  
+        if (!query) return;  
 
         try {  
-            const response = await fetch(url, options);  
-            const result = await response.json();  
-            setData(result.d);
+            const result = await searchMoviesFetch(query);  
+            setData(result);  
         } catch (error) {  
             console.error("Error fetching data:", error);  
         }  
-    }  
+    };  
 
     const handleKeyPress = (event) => {  
         if (event.key === 'Enter') {  
@@ -40,15 +31,13 @@ const Fetcher = () => {
                 onKeyPress={handleKeyPress}  
                 placeholder="Search for a movie..."  
             />  
-            <button onClick={fetchData} disabled={!query}>Search</button>
-            <h1>Fetched Movies:</h1>  
-            {data.length === 0 ? (  
-                <p>Please enter a search term to see results.</p> // Message when no results  
-            ) : (  
+            <button onClick={fetchData} disabled={!query}>Search</button>  
+            {/* <h1>Fetched Movies:</h1>   */}
+            { (  
                 <ul>  
                     {data.map(movie => (  
                         <li key={movie.id} style={{ display: 'flex', alignItems: 'center' }}>  
-                            {movie.i && <img src={movie.i.imageUrl} alt={movie.l} style={{ width: '100px', marginRight: '10px' }} />} {/* Adjust URL path based on actual API response */}  
+                            {movie.i && <img src={movie.i.imageUrl} alt={movie.l} style={{ width: '100px', marginRight: '10px' }} />}  
                             <span>{movie.l}</span>  
                         </li>  
                     ))}  
@@ -56,7 +45,6 @@ const Fetcher = () => {
             )}  
         </div>  
     );  
-}  
+};  
 
 export default Fetcher;
-
