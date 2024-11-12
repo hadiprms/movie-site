@@ -1,0 +1,50 @@
+.searchBar-inputAndButton{
+    width: 100%;
+    max-width: 300px;
+    max-height: 22px;
+    background-color: orange;
+    display: flex;
+    align-items: center;
+    border-radius: 60px;
+    padding: 10px 10px;
+    margin: 17px 0 0 10px;
+}
+.searchBar-inputAndButton input{
+    background: transparent;
+    border: 0;
+    outline: none;
+    padding: 0 20px;
+    font-size: 20px;
+    color: #cac7ff;
+}
+.searchBar-inputAndButton button{
+    margin-left: -65px;
+    border-radius: 50px;
+    background-color: #002366;
+    color: white;
+    font-weight: 400;
+}
+.searchBar-inputAndButton input:placeholder{
+color: white;
+}
+::placeholder{
+    color: white;
+    font-family: 300;
+    font-size: 15px;
+}
+.siteName{
+    float: right;
+    margin-right: 1%;
+    margin-top: -25px;
+}
+.siteName span{
+    color: white;
+    font-size: 50px;
+}
+.siteName p{
+    color: orange;
+    font-size: 50px;
+}
+.siteName img{
+    width: 40px;
+}
