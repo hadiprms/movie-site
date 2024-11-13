@@ -1,78 +1,166 @@
-.element {  
-    display: grid;  
-    grid-template-columns: repeat(7, 1fr);  
-    align-items: center;  
-    justify-content: center;  
-    gap: 1rem;  
-}  
-.element-div {  
-    height: 200px;  
-    margin: 0px;  
-    padding: 20px;  
-    color: white;
-}  
-p {  
-    margin: 0 auto;  
-}  
-.image-container {  
-    position: relative;  
-}  
-.overlay {  
-    display: flex;
-    position: absolute;  
-    top: 50%;  
-    left: 50%;  
-    transform: translate(-50%, -50%);  
-    background-color: black;  
-    color: white;  
-    padding: 10px;  
-    border-radius: 5px;  
-    font-size: 12px;  
-    font-weight: 600;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease; 
-}   
-.image-container:hover .overlay {  
-    opacity: 1;
-    visibility: visible; 
-}  
-.movie-image:hover {  
-    transform: scale(1.1);  
-    filter: blur(1px);  
-}  
-.movie-image {  
-    transition: transform 0.3s ease;  
-}   
-.overlay {  
-    pointer-events: none;
+@media screen and (min-width: 700px) {
+    .element {  
+        display: grid;  
+        grid-template-columns: repeat(8, 1fr);
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .element-div {
+        height: 200px;
+        margin: 0px;
+        padding: 5px;
+        color: white;
+    }
+    p {
+        margin: 0 auto;
+    }
+    .image-container { 
+        position: relative;
+    }  
+    .overlay {  
+        display: flex;
+        position: absolute;  
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: black;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: 600;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        pointer-events: none;
+    }   
+    .image-container:hover .overlay {  
+        opacity: 1;
+        visibility: visible; 
+    }  
+    .movie-image:hover {  
+        transform: scale(1.1);  
+        filter: blur(1px);  
+    }  
+    .movie-image {  
+        transition: transform 0.3s ease; 
+        width: 150px;
+        height: 230px;
+        margin-right: 10px;
+    }
+    .movieInfoHolder{
+        text-align: center;
+    }
+    .movieInfoHolder .movieTitleText{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 140px;
+    }
+    .titleHolder{
+        font-size: 20px;
+        text-align: left;
+        font-weight: 500;
+        color: white;
+        margin: 5px 0 15px 20px;
+    }
+    .All-moviesReturn{
+        border: 1px solid orange;
+        border-radius: 5px;
+        padding: 10px;
+        padding-bottom: 100px;
+        margin: 5% 0 5% 0;
+        background-color: black;
+    }
+    .ratingOfMovies{
+        color: orange;
+    }
 }
-.movieInfoHolder{
-    text-align: center;
+ 
+@media screen and (max-width: 700px) {
+    .All-moviesReturn {
+        padding: 20px;
+    }
+    .titleHolder {  
+        text-align: center;  
+        margin-bottom: 40px;  
+        font-size: 20px;
+        color: white;
+    }
+    .element {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .element-div {
+        width: calc(50% - 20px);
+        margin-bottom: 50px;
+        box-sizing: border-box;
+        color: white;
+        border: 1px solid orange;
+        border-radius: 10px;
+    }
+    .media {
+        position: relative;
+        overflow: hidden;
+    }
+    .image-container {
+        position: relative; 
+    }
+    .movie-image {
+        width: 100%;
+        height: 300px;
+        transition: transform 0.3s ease;
+        border-radius: 10px;
+    }
+    .overlay {  
+        display: flex;
+        position: absolute;  
+        top: 50%;  
+        left: 50%;  
+        transform: translate(-50%, -50%);  
+        background-color: black;  
+        color: white;  
+        padding: 10px;  
+        border-radius: 5px;  
+        font-size: 20px;  
+        font-weight: 600;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        pointer-events: none;
+    }
+    .movieInfoHolder {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 10px;
+    }
+    .movieTitleText {
+        font-weight: bold;
+    }
+    .ratingOfMovies {
+        color: orange;
+    }
+    .image-container:hover .overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+    .movie-image:hover {
+        filter: blur(3px);
+    } 
 }
-.movieInfoHolder .movieTitleText{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 140px;
-}
-.titleHolder{
-    font-size: 20px;
-    text-align: left;
-    font-weight: 500;
-    color: white;
-    /* margin-bottom: 2%;
-    margin-top: 5px;
-    margin-left: 20px; */
-    margin: 5px 0 15px 20px;
-}
-.All-moviesReturn{
-    border: 1px solid orange;
-    border-radius: 5px;
-    padding: 10px;
-    padding-bottom: 100px;
-    margin: 5% 0 5% 0;
-}
-.ratingOfMovies{
-    color: orange;
-}
+
+
+
+
+
+
+
+
+/* @media screen and (max-width: 700px) {
+    .element{
+        grid-template-columns: repeat(2, 1fr); 
+        display: inline-block;
+    }
+}baraye px pain tar vagti khastim 1 radif bashad o etela'at dar pain cart bashad is in estefade kon... niaz be kami taghirat dare. */

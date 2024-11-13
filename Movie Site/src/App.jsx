@@ -5,6 +5,7 @@ import './App.css'
 import Fetcher from './mainPageComponents/searchBar'
 import TopRatedMovies from './mainPageComponents/MostPopularMovies'
 import TopRatedSeries from './mainPageComponents/recentlyUpdatedSeries'
+import Footer from './mainPageComponents/footer'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Fetcher />
       <TopRatedMovies />
       <TopRatedSeries />
+      <Footer />
     </>
   )
 }
