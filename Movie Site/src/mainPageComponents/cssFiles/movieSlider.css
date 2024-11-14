@@ -1,31 +1,36 @@
 .All-Slider {  
     position: relative; 
-    height: 400px; /* Adjust as needed */  
+    height: 400px;
     width: 100%;
     background-size: cover;  
     background-position: center;  
     overflow: hidden;
+    padding: 12px;
 }
 .sliderContainer {  
     position: relative;  
     display: flex;
-    transition: transform 1s ease; /* Smooth transition */ 
+    transition: transform 1s ease;
     margin-left: 60%; 
 }
 .sliderElement {  
     position: absolute;  
-    width: 30%; /* Adjust based on how many movies you want to show */  
-    transition: left 1s ease; /* Smooth slide effect */  
+    width: 30%;
+    transition: left 1s ease;
 }
 .sliderImage-container {  
     position: relative;  
     overflow: hidden;  
 }
 .sliderMovie-image {  
-    width: 80%;  
-    height: 200px; 
+    width: 70%;  
+    height: 210px; 
     margin-top: 50%;
     margin-bottom: 50%;
+    border-radius: 5px;
+}
+.sliderMovie-image:hover{
+    transform: scale(1.1);
 }
 .Sliderverlay {  
     position: absolute;  
@@ -37,10 +42,18 @@
 }
 .sliderInfoHolder {  
     position: absolute;  
-    bottom: 50px; /* Adjust as needed */  
+    bottom: 50px;
     left: 10px;  
+    margin-bottom: 8%;
+    margin-left: 5rem;
+    font-size: 30px;
     color: white;  
+    text-align: left;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 5px;
 }
 .ratingOfSlider {  
-    font-weight: bold;  
+    font-weight: bold;
+    color: orange;
 }

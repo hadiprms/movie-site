@@ -25,7 +25,7 @@ const MovieSlider = () => {
     useEffect(() => {  
         const interval = setInterval(() => {  
             setCurrentIndex((prevIndex) => (prevIndex + 1) % (movies.length || 1));  
-        }, 3000); // Change movie every 3 seconds  
+        }, 7000); // Change movie every 7 seconds  
         return () => clearInterval(interval);  
     }, [movies.length]);  
 
@@ -40,40 +40,37 @@ const MovieSlider = () => {
     const displayedMovies = movies.slice(currentIndex, currentIndex + 4).concat(movies.slice(0, Math.max(0, currentIndex - 4)));
 
     return (  
-        <div className='All-Slider' style={{ backgroundImage: `url(${movies[currentIndex].node.primaryImage.url})` }}>    
-            <div className='sliderContainer'> 
+        <div className='All-Slider' style={{ backgroundImage: `url(${movies[currentIndex].node.primaryImage.url})`}}>  
+            <div className='sliderContainer'>   
                 {displayedMovies.map((movie, index) => (  
                     <div key={movie.node.id} className='sliderElement' style={{ left: `${index * 25}%` }}>  
-                        <div className='sliderImage-container'>  
-                            {movie.node.primaryImage && (  
-                                <img   
-                                    src={movie.node.primaryImage.url}   
-                                    alt={movie.node.titleText.text}   
-                                    className='sliderMovie-image'   
-                                />  
-                            )}   
+                        <div className='rightAndLeftSide'>  
+                            <div className='right-side'>  
+                                <div className='sliderImage-container'>  
+                                    {movie.node.primaryImage && (  
+                                        <img   
+                                            src={movie.node.primaryImage.url}   
+                                            alt={movie.node.primaryImage.url}   
+                                            className='sliderMovie-image'   
+                                        />  
+                                    )}   
+                                </div>  
+                            </div>  
                         </div>  
-                        {/* Only show title and rating for the first displayed movie */}  
-                        {index === 0 && (  
-                            <div className='leftSide'>
-                                <div className='sliderInfoHolder'>  
-                                    <p className='sliderTitleText'>{movie.node.titleText.text}</p>  
-                                    <p>  
-                                        {movie.node.releaseYear.year} |   
-                                        <span className='ratingOfSlider'>{movie.node.ratingsSummary.aggregateRating} /10</span>  
-                                    </p>  
-                                </div>
-                                <div className='Sliderverlay'>                      
-                                    {movie.node.titleGenres.genres.slice(0, 1).map(gTitle => (  
-                                        <div key={gTitle.genre.text}>  
-                                            <p>{gTitle.genre.text}</p>  
-                                        </div>  
-                                    ))}   
-                                </div> 
-                            </div>
-                        )}  
                     </div>  
                 ))}  
+            </div>  
+            {/* Title and Rating Section on the right side */}  
+            <div className='titleContainer'>  
+                {displayedMovies.length > 0 && (  
+                    <div className='sliderInfoHolder'>  
+                        <p className='sliderTitleText'>{displayedMovies[0].node.titleText.text}</p>  
+                        <p>  
+                            {displayedMovies[0].node.releaseYear.year} | 
+                            <span className='ratingOfSlider'> {displayedMovies[0].node.ratingsSummary.aggregateRating} /10</span>  
+                        </p>
+                    </div>  
+                )}  
             </div>  
         </div>  
     );
