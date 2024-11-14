@@ -15,7 +15,7 @@ function App() {
       <Fetcher />
       <MovieSlider />
       <TopRatedMovies />
-      <TopRatedSeries />
+      {/* <TopRatedSeries /> */}
       <Footer />
     </>
   )

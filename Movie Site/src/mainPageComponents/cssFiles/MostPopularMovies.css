@@ -1,15 +1,22 @@
 @media screen and (min-width: 700px) {
-    .element {  
-        display: grid;  
-        grid-template-columns: repeat(8, 1fr);
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
+    * {
+        box-sizing: border-box;
     }
-    .element-div {
-        height: 200px;
-        margin: 0px;
-        padding: 5px;
+    body {  
+        margin: 0;
+        overflow-x: hidden;
+    }
+    .element {  
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+        margin: 0 auto;
+        max-width: 1600px;
+        padding: 0 15px;
+        width: 95%;
+    }
+        .element-div {
         color: white;
     }
     p {
@@ -41,7 +48,8 @@
     }  
     .movie-image:hover {  
         transform: scale(1.1);  
-        filter: blur(1px);  
+        filter: blur(1px);
+        border: 2px solid orange;
     }  
     .movie-image {  
         transition: transform 0.3s ease; 
@@ -66,7 +74,7 @@
         margin: 5px 0 15px 20px;
     }
     .All-moviesReturn{
-        border: 1px solid orange;
+        border: 1px solid black;
         border-radius: 5px;
         padding: 10px;
         padding-bottom: 100px;

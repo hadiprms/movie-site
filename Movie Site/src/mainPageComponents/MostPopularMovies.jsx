@@ -33,7 +33,7 @@ const TopRatedMovies = () => {
         <div className='All-moviesReturn'>  
             <h1 className='titleHolder'>Most popular on this week:</h1>
             <div className='element'>
-                {movies.map((movie) => {
+                {movies.slice(0 , 21).map((movie) => {
                     return(
                         <div className='element-div'>
                             <div className='media'>
