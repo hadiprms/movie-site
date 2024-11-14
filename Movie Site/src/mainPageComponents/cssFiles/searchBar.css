@@ -49,6 +49,10 @@
     .siteName img{
         width: 40px;
     }
+    .searchResult img{
+        height: auto;
+        width: 100px;
+    }
 }
 
 @media screen and (max-width:700px) {

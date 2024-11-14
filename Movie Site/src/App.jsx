@@ -6,12 +6,14 @@ import Fetcher from './mainPageComponents/searchBar'
 import TopRatedMovies from './mainPageComponents/MostPopularMovies'
 import TopRatedSeries from './mainPageComponents/recentlyUpdatedSeries'
 import Footer from './mainPageComponents/footer'
+import MovieSlider from './mainPageComponents/MovieSlider'
 
 function App() {
 
   return (
     <>
       <Fetcher />
+      <MovieSlider />
       <TopRatedMovies />
       <TopRatedSeries />
       <Footer />

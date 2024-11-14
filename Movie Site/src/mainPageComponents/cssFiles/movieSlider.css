@@ -1,0 +1,46 @@
+.All-Slider {  
+    position: relative; 
+    height: 400px; /* Adjust as needed */  
+    width: 100%;
+    background-size: cover;  
+    background-position: center;  
+    overflow: hidden;
+}
+.sliderContainer {  
+    position: relative;  
+    display: flex;
+    transition: transform 1s ease; /* Smooth transition */ 
+    margin-left: 60%; 
+}
+.sliderElement {  
+    position: absolute;  
+    width: 30%; /* Adjust based on how many movies you want to show */  
+    transition: left 1s ease; /* Smooth slide effect */  
+}
+.sliderImage-container {  
+    position: relative;  
+    overflow: hidden;  
+}
+.sliderMovie-image {  
+    width: 80%;  
+    height: 200px; 
+    margin-top: 50%;
+    margin-bottom: 50%;
+}
+.Sliderverlay {  
+    position: absolute;  
+    bottom: 10px;  
+    left: 10px;  
+    background: rgba(0, 0, 0, 0.5);  
+    color: white;  
+    padding: 5px;  
+}
+.sliderInfoHolder {  
+    position: absolute;  
+    bottom: 50px; /* Adjust as needed */  
+    left: 10px;  
+    color: white;  
+}
+.ratingOfSlider {  
+    font-weight: bold;  
+}
