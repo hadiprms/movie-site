@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';  
 import DataQuery from '../common/dataQuery';
 import './cssFiles/MostPopularMovies.css'
+import MostPopularSkeleton from './skeletonFiles/MostPopularSkeleton';
 
 const TopRatedMovies = () => {  
     const [movies, setMovies] = useState([]);  
@@ -22,7 +23,7 @@ const TopRatedMovies = () => {
     }, []);  
 
     if (loading) {  
-        return <div>Loading...</div>;  
+        return <div className='test'><MostPopularSkeleton cards={21}/></div>;  
     }  
 
     if (error) {  
@@ -33,6 +34,7 @@ const TopRatedMovies = () => {
         <div className='All-moviesReturn'>  
             <h1 className='titleHolder'>Most popular on this week:</h1>
             <div className='element'>
+                {/* <MostPopularSkeleton cards={21}/> */}
                 {movies.slice(0 , 21).map((movie) => {
                     return(
                         <div className='element-div'>

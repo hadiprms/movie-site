@@ -7,15 +7,18 @@ import TopRatedMovies from './mainPageComponents/MostPopularMovies'
 import TopRatedSeries from './mainPageComponents/recentlyUpdatedSeries'
 import Footer from './mainPageComponents/footer'
 import MovieSlider from './mainPageComponents/MovieSlider'
+import { SkeletonTheme } from 'react-loading-skeleton'
 
 function App() {
 
   return (
     <>
-      <MovieSlider />
-      <TopRatedMovies />
-      {/* <TopRatedSeries /> */}
-      <Footer />
+      <SkeletonTheme baseColor="#313131" highlightColor="#525252">
+        <MovieSlider />
+        <TopRatedMovies />
+        {/* <TopRatedSeries /> */}
+        <Footer />
+      </SkeletonTheme>
     </>
   )
 }

@@ -86,6 +86,20 @@
     .ratingOfMovies{
         color: orange;
     }
+    .MP-Skeleton{
+        width: 170px;
+        height: 230px;
+        margin-right: 10px;
+        border-radius: 10px;
+    }
+    .test{
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 0.1fr));
+        gap: 20px;
+        list-style: none;
+        padding-left: 0;
+        margin-right: 10px;
+    }
 }
  
 @media screen and (max-width: 700px) {
