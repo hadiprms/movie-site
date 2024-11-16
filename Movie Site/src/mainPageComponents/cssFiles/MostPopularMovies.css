@@ -53,9 +53,10 @@
     }  
     .movie-image {  
         transition: transform 0.3s ease; 
-        width: 150px;
+        width: 170px;
         height: 230px;
         margin-right: 10px;
+        border-radius: 10px;
     }
     .movieInfoHolder{
         text-align: center;
@@ -71,7 +72,7 @@
         text-align: left;
         font-weight: 500;
         color: white;
-        margin: 5px 0 15px 20px;
+        margin: 5px 0 30px 3%;
     }
     .All-moviesReturn{
         border: 1px solid black;

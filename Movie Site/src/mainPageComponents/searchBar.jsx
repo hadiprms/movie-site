@@ -36,7 +36,7 @@ const Fetcher = () => {
                         onKeyPress={handleKeyPress}  
                         placeholder="Search for a movie..."  
                     />  
-                    <button onClick={fetchData} disabled={!query}>Search</button>
+                    <button onClick={fetchData} disabled={!query}>search</button>
                 </div>
             </div>
             {(  
