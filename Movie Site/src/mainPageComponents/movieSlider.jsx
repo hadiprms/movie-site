@@ -10,7 +10,8 @@ const MovieSlider = () => {
     const [movies, setMovies] = useState([]);  
     const [loading, setLoading] = useState(true);  
     const [error, setError] = useState(null);  
-    const [currentIndex, setCurrentIndex] = useState(0);  
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     useEffect(() => {  
         const fetchMovies = async () => {  
@@ -33,6 +34,14 @@ const MovieSlider = () => {
         return () => clearInterval(interval);  
     }, [movies.length]);  
 
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+    
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     if (loading) {  
         return <div><Skeleton height={800}/></div>;  
     }  
@@ -44,7 +53,9 @@ const MovieSlider = () => {
     const displayedMovies = movies.slice(currentIndex, currentIndex + 4).concat(movies.slice(0, Math.max(0, currentIndex - 4)));
 
     return (  
-        <div className='All-Slider' style={{ backgroundImage: `url(${movies[currentIndex].node.primaryImage.url})`}}>  
+        <div className='All-Slider' style={{
+            backgroundImage: windowWidth > 700 ? `url(${movies[currentIndex].node.primaryImage.url})` : 'none'
+        }}>
         <Fetcher />
             <div className='sliderContainer'>   
                 {displayedMovies.map((movie, index) => (  
