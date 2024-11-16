@@ -1,6 +1,6 @@
 .All-Slider {  
     position: relative; 
-    height: 400px;
+    height: 800px;
     width: 100%;
     background-size: cover;  
     background-position: center;  
@@ -44,7 +44,7 @@
     position: absolute;  
     bottom: 50px;
     left: 10px;  
-    margin-bottom: 8%;
+    margin-bottom: 23.5%;
     margin-left: 5rem;
     font-size: 30px;
     color: white;  

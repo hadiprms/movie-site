@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';  
 import DataQuery from '../common/dataQuery';  
-import './cssFiles/MovieSlider.css';   
+import './cssFiles/MovieSlider.css';  
+import Fetcher from './searchBar'; 
 
 const MovieSlider = () => {  
     const [movies, setMovies] = useState([]);  
@@ -41,6 +42,7 @@ const MovieSlider = () => {
 
     return (  
         <div className='All-Slider' style={{ backgroundImage: `url(${movies[currentIndex].node.primaryImage.url})`}}>  
+        <Fetcher />
             <div className='sliderContainer'>   
                 {displayedMovies.map((movie, index) => (  
                     <div key={movie.node.id} className='sliderElement' style={{ left: `${index * 25}%` }}>  
