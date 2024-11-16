@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';  
 import DataQuery from '../common/dataQuery';  
 import './cssFiles/MovieSlider.css';  
-import Fetcher from './searchBar'; 
+import Fetcher from './searchBar';
+import './cssFiles/MostPopularMovies.css'
+import MostPopularSkeleton from './skeletonFiles/MostPopularSkeleton';
+import Skeleton from 'react-loading-skeleton';
 
 const MovieSlider = () => {  
     const [movies, setMovies] = useState([]);  
@@ -31,7 +34,7 @@ const MovieSlider = () => {
     }, [movies.length]);  
 
     if (loading) {  
-        return <div>Loading...</div>;  
+        return <div><Skeleton height={800}/></div>;  
     }  
 
     if (error) {  

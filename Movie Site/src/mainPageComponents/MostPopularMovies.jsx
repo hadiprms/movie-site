@@ -19,12 +19,9 @@ const TopRatedMovies = () => {
                 setLoading(false);  
             }  
         };  
-        fetchMovies();  
+        fetchMovies();
     }, []);  
 
-    if (loading) {  
-        // return <div className='test'><MostPopularSkeleton cards={21}/></div>;  
-    }  
 
     if (error) {  
         return <div>Error: {error}</div>;  
