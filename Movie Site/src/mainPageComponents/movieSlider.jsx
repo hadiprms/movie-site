@@ -53,41 +53,47 @@ const MovieSlider = () => {
     const displayedMovies = movies.slice(currentIndex, currentIndex + 4).concat(movies.slice(0, Math.max(0, currentIndex - 4)));
 
     return (  
-        <div className='All-Slider' style={{
+        <div className='All-Slider' style={{   
             backgroundImage: windowWidth > 700 ? `url(${movies[currentIndex].node.primaryImage.url})` : 'none'
         }}>
         <Fetcher />
-            <div className='sliderContainer'>   
-                {displayedMovies.map((movie, index) => (  
-                    <div key={movie.node.id} className='sliderElement' style={{ left: `${index * 25}%` }}>  
-                        <div className='rightAndLeftSide'>  
-                            <div className='right-side'>  
-                                <div className='sliderImage-container'>  
-                                    {movie.node.primaryImage && (  
-                                        <img   
-                                            src={movie.node.primaryImage.url}   
-                                            alt={movie.node.primaryImage.url}   
-                                            className='sliderMovie-image'   
-                                        />  
-                                    )}   
+        <h1 className='sliderMobileTitle'>You might like:</h1>
+            <div className='allSliderDiv'>
+                <div className='sliderContainer'>   
+                    {displayedMovies.map((movie, index) => (  
+                        <div key={movie.node.id} className='sliderElement' style={{  
+                            left: window.innerWidth >= 700 ? `${index * 25}%` : undefined,  
+                            right: window.innerWidth < 700 ? `${index * 80}%` : undefined,  
+                        }}>  
+                            <div className='rightAndLeftSide'>  
+                                <div className='right-side'>  
+                                    <div className='sliderImage-container'>  
+                                        {movie.node.primaryImage && (  
+                                            <img   
+                                                src={movie.node.primaryImage.url}   
+                                                alt={movie.node.primaryImage.url}   
+                                                className='sliderMovie-image'   
+                                            />  
+                                        )}   
+                                    </div>  
                                 </div>  
                             </div>  
                         </div>  
-                    </div>  
-                ))}  
-            </div>  
-            {/* Title and Rating Section on the right side */}  
-            <div className='titleContainer'>  
-                {displayedMovies.length > 0 && (  
-                    <div className='sliderInfoHolder'>  
-                        <p className='sliderTitleText'>{displayedMovies[0].node.titleText.text}</p>  
-                        <p>  
-                            {displayedMovies[0].node.releaseYear.year} | 
-                            <span className='ratingOfSlider'> {displayedMovies[0].node.ratingsSummary.aggregateRating} /10</span>  
-                        </p>
-                    </div>  
-                )}  
-            </div>  
+                    ))}  
+                </div>  
+                {/* Title and Rating Section on the right side */}  
+                <div className='titleContainer'>  
+                    {displayedMovies.length > 0 && (  
+                        <div className='sliderInfoHolder'>  
+                            <p className='sliderTitleText'>{displayedMovies[0].node.titleText.text}</p>  
+                            <p>  
+                                {displayedMovies[0].node.releaseYear.year} | 
+                                <span className='ratingOfSlider'> {displayedMovies[0].node.ratingsSummary.aggregateRating} /10</span>  
+                            </p>
+                        </div>  
+                    )}  
+                </div>
+            </div>
         </div>  
     );
 };  
