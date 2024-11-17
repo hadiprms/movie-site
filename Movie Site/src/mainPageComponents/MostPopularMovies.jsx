@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';  
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import DataQuery from '../common/dataQuery';
 import './cssFiles/MostPopularMovies.css'
 import MostPopularSkeleton from './skeletonFiles/MostPopularSkeleton';
+
 
 const TopRatedMovies = () => {  
     const [movies, setMovies] = useState([]);  
@@ -33,9 +35,10 @@ const TopRatedMovies = () => {
             <div className='element'>
                 {loading && <MostPopularSkeleton cards={21}/>}
                 {movies.slice(0 , 21).map((movie) => {
+                    const movieId = movie.node.titleText.text;
                     return(
-                        <div className='element-div'>
-                            <div className='media'>
+                        <div className='element-div' key={movieId}>
+                            <Link to={`/movie/${movieId}`} className='media'>
                                 <div className='image-container'>
                                     {movie.node.primaryImage && <img src={movie.node.primaryImage.url} alt={movie.node.primaryImage.url} className='movie-image' />}
                                     <div className='overlay'>                      
@@ -50,7 +53,7 @@ const TopRatedMovies = () => {
                                 <p className='movieTitleText'>{movie.node.titleText.text}</p>
                                 <p>{movie.node.releaseYear.year} | <span className='ratingOfMovies'>{movie.node.ratingsSummary.aggregateRating} /10</span></p>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     )
                 })}

@@ -8,16 +8,23 @@ import TopRatedSeries from './mainPageComponents/recentlyUpdatedSeries'
 import Footer from './mainPageComponents/footer'
 import MovieSlider from './mainPageComponents/MovieSlider'
 import { SkeletonTheme } from 'react-loading-skeleton'
+import MovieDetail from './MovieDetails/movieDetail.jsx'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function Main() {
 
   return (
     <>
       <SkeletonTheme baseColor="#313131" highlightColor="#525252">
-        <MovieSlider />
-        <TopRatedMovies />
         {/* <TopRatedSeries /> */}
-        <Footer />
+        {/* <MovieSlider /> */}
+        <Router>
+            <Routes>
+                <Route path="/" element={<TopRatedMovies />} />
+                <Route path="/movie/:movieId" element={<MovieDetail />} />
+            </Routes>
+        </Router>
+        {/* <Footer /> */}
       </SkeletonTheme>
     </>
   )
