@@ -38,7 +38,12 @@ const TopRatedMovies = () => {
                     const movieId = movie.node.titleText.text;
                     return(
                         <div className='element-div' key={movieId}>
-                            <Link to={`/movie/${movieId}`} className='media'>
+                            <Link
+                            to={`/movie/${movieId},
+                            ${movie.node.primaryImage ? encodeURIComponent(movie.node.primaryImage.url) : ''},
+                            ${movie.node.releaseYear.year}`}
+                            className='media'
+                            >
                                 <div className='image-container'>
                                     {movie.node.primaryImage && <img src={movie.node.primaryImage.url} alt={movie.node.primaryImage.url} className='movie-image' />}
                                     <div className='overlay'>                      
