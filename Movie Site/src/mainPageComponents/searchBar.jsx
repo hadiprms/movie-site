@@ -1,4 +1,5 @@
-import React, { useState } from "react";  
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import { searchMoviesFetch } from "../common/searchDataQuery";
 import './cssFiles/searchBar.css'
 const Fetcher = () => {  
@@ -42,9 +43,11 @@ const Fetcher = () => {
             {(  
                 <ul className="searchResult" style={{ display: 'flex', flexWrap: 'wrap', listStyleType: 'none', padding: 0, alignItems: 'center' }}>  
                     {data.map(movie => (  
-                        <li key={movie.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 10px' }}>  
-                            {movie.i && <img src={movie.i.imageUrl} alt={movie.l} style={{ width: '100px', marginBottom: '10px' }} />}  
-                            <span style={{ textAlign: 'center' }}>{movie.l}</span>  
+                        <li key={movie.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 10px' }}>
+                            <Link to={`/movie/${movie.id}`}>
+                            {movie.i && <img src={movie.i.imageUrl} alt={movie.l} style={{ width: '100px', marginBottom: '10px' }} />}
+                            <span style={{ textAlign: 'center' }}>{movie.l}</span>
+                            </Link>
                         </li>  
                     ))}  
                 </ul>  

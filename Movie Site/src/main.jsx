@@ -17,15 +17,12 @@ function Main() {
   return (
     <>
       <SkeletonTheme baseColor="#313131" highlightColor="#525252">
-        {/* <TopRatedSeries /> */}
-        {/* <MovieSlider /> */}
         <Router>
             <Routes>
                 <Route path="/" element={<MainPageRouterFiles />} />
                 <Route path="/movie/:movieId" element={<MovieDetail />} />
             </Routes>
         </Router>
-        {/* <Footer /> */}
       </SkeletonTheme>
     </>
   )
