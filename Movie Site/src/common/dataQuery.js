@@ -4,7 +4,7 @@ class DataQuery {
             const options = {  
                 method: 'GET',  
                 headers: {  
-                    'x-rapidapi-key': '0fe7888d6cmsh30f8bafa42bba8dp1a2031jsne31a29d4f7fa',
+                    'x-rapidapi-key': '13d36acf19mshffe07a8a0a584bfp198690jsn19f1243d441c',
                     'x-rapidapi-host': 'imdb8.p.rapidapi.com'  
                 }  
             }; 
