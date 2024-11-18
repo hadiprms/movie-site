@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { searchMoviesFetch } from "../common/searchDataQuery";
 import './cssFiles/searchBar.css';
@@ -7,6 +7,7 @@ const Fetcher = () => {
     const [query, setQuery] = useState("");
     const [data, setData] = useState([]);
     const [showResults, setShowResults] = useState(false);
+    const searchRef = useRef(null);
 
     const fetchData = async (searchQuery) => {
         if (!searchQuery) {
@@ -33,9 +34,22 @@ const Fetcher = () => {
             clearTimeout(handler);
         };
     }, [query]);
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setShowResults(false);
+                setQuery("");
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }} ref={searchRef}>
             <div className="siteNameAndInput">
                 <div className="siteName">
                     <p>Best <span>Movies</span><img src="https://img.icons8.com/?size=100&id=11139&format=png&color=FD7E14" alt="image" /></p>  
