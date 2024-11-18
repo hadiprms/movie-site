@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';  
 import DataQuery from '../common/dataQuery';  
+import { Link } from 'react-router-dom';
 import './cssFiles/MovieSlider.css';  
 import Fetcher from './searchBar';
 import './cssFiles/MostPopularMovies.css'
@@ -67,15 +68,17 @@ const MovieSlider = () => {
                         }}>  
                             <div className='rightAndLeftSide'>  
                                 <div className='right-side'>  
-                                    <div className='sliderImage-container'>  
-                                        {movie.node.primaryImage && (  
-                                            <img   
-                                                src={movie.node.primaryImage.url}   
-                                                alt={movie.node.primaryImage.url}   
-                                                className='sliderMovie-image'   
-                                            />  
-                                        )}   
-                                    </div>  
+                                    <div className='sliderImage-container'>
+                                        <Link to={`/movie/${movie.node.id}`}>
+                                            {movie.node.primaryImage && (
+                                                <img   
+                                                    src={movie.node.primaryImage.url}
+                                                    alt={movie.node.primaryImage.url}
+                                                    className='sliderMovie-image'
+                                                />
+                                            )}
+                                        </Link>
+                                    </div>
                                 </div>  
                             </div>  
                         </div>  
