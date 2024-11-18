@@ -27,6 +27,10 @@ class DataQuery {
         const resultOfSeries = await DataQuery.fetch('https://imdb8.p.rapidapi.com/title/v2/get-popular?first=8&country=US&language=en-US')
         return resultOfSeries;
     }
+    static async fetchMovieDetail(movieId){
+        const resultOfDetail = await DataQuery.fetch(`https://imdb8.p.rapidapi.com/title/v2/get-details?tconst=${movieId}&country=US&language=en-US`)
+        return resultOfDetail;
+    }
 }
 
 export default DataQuery;
