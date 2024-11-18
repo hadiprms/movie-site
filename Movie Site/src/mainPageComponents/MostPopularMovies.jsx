@@ -54,7 +54,7 @@ const TopRatedMovies = () => {
                                 </div>
                                 <div className='movieInfoHolder'>
                                 <p className='movieTitleText'>{movie.node.titleText.text}</p>
-                                <p>{movie.node.releaseYear.year} | <span className='ratingOfMovies'>{movie.node.ratingsSummary.aggregateRating} /10</span></p>
+                                <p><span className='realseYearOfMobies'>{movie.node.releaseYear.year} | </span><span className='ratingOfMovies'>{movie.node.ratingsSummary.aggregateRating} /10</span></p>
                                 </div>
                             </Link>
                         </div>
