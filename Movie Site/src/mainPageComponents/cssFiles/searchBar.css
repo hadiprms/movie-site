@@ -146,5 +146,23 @@
         display: grid;
         justify-content: center;
     }
+    .searchResult{
+        display: flex;
+        justify-content: space-between;
+        height: 30%;
+        top: 63px;
+        background: rgba(20, 24, 33, .75);
+        border: 1px solid rgba(20, 24, 33, .75);
+        border-radius: 5px;
+        z-index: 1000;
+        flex-wrap: wrap;
+        list-style-type: none;
+        padding: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .searchResult-Info{
+        display: grid;
+        margin-right: 15px;
+    }
 }
  
