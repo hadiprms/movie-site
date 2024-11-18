@@ -35,13 +35,11 @@ const TopRatedMovies = () => {
             <div className='element'>
                 {loading && <MostPopularSkeleton cards={21}/>}
                 {movies.slice(0 , 21).map((movie) => {
-                    const movieId = movie.node.titleText.text;
+                    const movieId = movie.node.id;
                     return(
                         <div className='element-div' key={movieId}>
                             <Link
-                            to={`/movie/${movieId},
-                            ${movie.node.primaryImage ? encodeURIComponent(movie.node.primaryImage.url) : ''},
-                            ${movie.node.releaseYear.year}`}
+                            to={`/movie/${movieId}`}
                             className='media'
                             >
                                 <div className='image-container'>

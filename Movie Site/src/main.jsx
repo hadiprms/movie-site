@@ -9,6 +9,7 @@ import Footer from './mainPageComponents/footer'
 import MovieSlider from './mainPageComponents/MovieSlider'
 import { SkeletonTheme } from 'react-loading-skeleton'
 import MovieDetail from './MovieDetails/movieDetail.jsx'
+import MainPageRouterFiles from './mainPageComponents/mainPageRouter/mainPageRouter.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function Main() {
@@ -20,7 +21,7 @@ function Main() {
         {/* <MovieSlider /> */}
         <Router>
             <Routes>
-                <Route path="/" element={<TopRatedMovies />} />
+                <Route path="/" element={<MainPageRouterFiles />} />
                 <Route path="/movie/:movieId" element={<MovieDetail />} />
             </Routes>
         </Router>
