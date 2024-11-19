@@ -15,7 +15,7 @@ const ErrorHandler = () => {
                 <h1 style={{color:'orange', textAlign:'center', fontSize:'40px', width:'100%'}}>Error 404: Page Not Found</h1>
             </div>
             <div>
-                <button onClick={handleGoHome}>
+                <button onClick={handleGoHome} className='errorPageHomeButton'>
                     Go to Main Page
                 </button>
             </div>

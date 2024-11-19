@@ -56,6 +56,8 @@
 }
 .loadingMassage{
     color: white;
+    margin-left: 50%;
+    margin-right: 50%;
 }
 
 @media screen and (max-width:650px) {

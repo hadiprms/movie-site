@@ -76,6 +76,7 @@
         position: absolute;
         position: fixed;
         /* height: 30%; */
+        transition: transform 1s ease;
         top: 63px;
         background: rgba(20, 24, 33, .75);
         border: 1px solid rgba(20, 24, 33, .75);
