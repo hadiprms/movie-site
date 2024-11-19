@@ -27,7 +27,7 @@ const MovieDetail = () => {
     }, [movieId]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className='loadingMassage'>Loading...</div>;
     }
 
     if (error) {  
