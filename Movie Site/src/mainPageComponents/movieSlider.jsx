@@ -31,7 +31,7 @@ const MovieSlider = () => {
     useEffect(() => {  
         const interval = setInterval(() => {  
             setCurrentIndex((prevIndex) => (prevIndex + 1) % (movies.length || 1));  
-        }, 7000); // Change movie every 7 seconds  
+        }, 3000); // Change movie every 7 seconds  
         return () => clearInterval(interval);  
     }, [movies.length]);  
 
@@ -51,11 +51,14 @@ const MovieSlider = () => {
         return <div>Error: {error}</div>;  
     }  
 
-    const displayedMovies = movies.slice(currentIndex, currentIndex + 4).concat(movies.slice(0, Math.max(0, currentIndex - 4)));
+    const displayedMovies = [  
+        ...movies.slice(currentIndex, currentIndex + 4),  
+        ...movies.slice(0, Math.max(0, 4 - (movies.length - currentIndex)))  
+    ].slice(0, 4);
 
     return (  
         <div className='All-Slider' style={{   
-            backgroundImage: windowWidth > 700 ? `url(${movies[currentIndex].node.primaryImage.url})` : 'none'
+            backgroundImage: windowWidth > 899 ? `url(${movies[currentIndex].node.primaryImage.url})` : 'none'
         }}>
         <Fetcher />
         <h1 className='sliderMobileTitle'>You might like:</h1>
@@ -63,8 +66,8 @@ const MovieSlider = () => {
                 <div className='sliderContainer'>   
                     {displayedMovies.map((movie, index) => (  
                         <div key={movie.node.id} className='sliderElement' style={{  
-                            left: window.innerWidth >= 700 ? `${index * 25}%` : undefined,  
-                            right: window.innerWidth < 700 ? `${index * 80}%` : undefined,  
+                            left: window.innerWidth >= 900 ? `${index * 25}%` : undefined,  
+                            right: window.innerWidth < 900 ? `${index * 80}%` : undefined,  
                         }}>  
                             <div className='rightAndLeftSide'>  
                                 <div className='right-side'>  
@@ -88,8 +91,8 @@ const MovieSlider = () => {
                 <div className='titleContainer'>  
                     {displayedMovies.length > 0 && (  
                         <div className='sliderInfoHolder'>  
-                            <p className='sliderTitleText'>{displayedMovies[0].node.titleText.text}</p>  
-                            <p>  
+                            <p className='sliderTitleText' style={{textAlign:'center'}}>{displayedMovies[0].node.titleText.text}</p>  
+                            <p style={{textAlign:'center'}}>  
                                 {displayedMovies[0].node.releaseYear.year} | 
                                 <span className='ratingOfSlider'> {displayedMovies[0].node.ratingsSummary.aggregateRating} /10</span>  
                             </p>
