@@ -8,6 +8,7 @@ const TopRatedMovies = () => {
     const [movies, setMovies] = useState([]);  
     const [loading, setLoading] = useState(true);  
     const [error, setError] = useState(null);  
+    const [displayCount, setDisplayCount] = useState(21);
 
     useEffect(() => {  
         const fetchMovies = async () => {  
@@ -32,6 +33,9 @@ const TopRatedMovies = () => {
             localStorage.setItem('watchlist', JSON.stringify(storedWatchlist));
         }
     };
+    const loadMoreMovies = () => {
+        setDisplayCount(prevCount => prevCount + 21);
+    };
 
     if (error) {  
         return <div>Error: {error}</div>;  
@@ -42,7 +46,7 @@ const TopRatedMovies = () => {
             <h1 className='titleHolder'>Most popular this week:</h1>
             <div className='element'>
                 {loading && <MostPopularSkeleton cards={21} />}
-                {movies.slice(0, 21).map((movie) => {
+                {movies.slice(0, displayCount).map((movie) => {
                     const movieId = movie.node.id;
 
                     return (
@@ -71,6 +75,9 @@ const TopRatedMovies = () => {
                     );
                 })}
             </div>
+            {movies.length > displayCount && (
+                <button className='addMoreButton' onClick={loadMoreMovies}>Load More</button>
+            )}
             <div>
                 <Link to="/watchlist">
                     <button>View Watchlist</button>

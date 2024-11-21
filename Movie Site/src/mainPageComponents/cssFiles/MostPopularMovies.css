@@ -92,6 +92,15 @@
         margin-right: 10px;
         border-radius: 10px;
     }
+    .addMoreButton{
+        margin: 0;
+        position: absolute;
+        margin-top: 5%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        border: none;
+    }
 }
 .movieTitleText{
     color: white;
