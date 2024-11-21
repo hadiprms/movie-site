@@ -7,6 +7,7 @@ const Fetcher = () => {
     const [query, setQuery] = useState("");
     const [data, setData] = useState([]);
     const [showResults, setShowResults] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); 
     const searchRef = useRef(null);
 
     const fetchData = async (searchQuery) => {
@@ -16,12 +17,15 @@ const Fetcher = () => {
             return;
         }
 
+        setIsLoading(true);
         try {
             const result = await searchMoviesFetch(searchQuery);
             setData(result);
             setShowResults(result.length > 0);
         } catch (error) {
             console.error("Error fetching data:", error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -66,20 +70,24 @@ const Fetcher = () => {
             </div>
             {showResults && (
                 <ul className="searchResult"> 
-                    {data.slice(0, 4).map((movie) => (
-                        <li key={movie.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 10px' }}>
-                            <Link to={`/movie/${movie.id}`}>
-                                <div className="searchResult-Info">
-                                    {movie.i && <img src={movie.i.imageUrl} alt={movie.l} style={{ width: '100px', marginBottom: '10px' }} />}
-                                    <span style={{ textAlign: 'center' }}>{movie.l}</span>
-                                </div>
-                            </Link>
-                        </li>  
-                    ))}  
-                </ul>  
-            )}  
+                    {isLoading ? ( 
+                        <li className="loadingMessage" style={{ textAlign: 'center' , color: 'white'}}>Loading...</li>
+                    ) : (
+                        data.slice(0, 4).map((movie) => (
+                            <li key={movie.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 10px' }}>
+                                <Link to={`/movie/${movie.id}`}>
+                                    <div className="searchResult-Info">
+                                        {movie.i && <img src={movie.i.imageUrl} alt={movie.l} style={{ width: '100px', marginBottom: '10px' }} />}
+                                        <span style={{ textAlign: 'center' }}>{movie.l}</span>
+                                    </div>
+                                </Link>
+                            </li>
+                        ))
+                    )}
+                </ul>
+            )}
         </div>  
-    );  
+    );
 };  
 
 export default Fetcher;
