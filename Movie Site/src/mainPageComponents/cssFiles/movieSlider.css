@@ -10,7 +10,7 @@
     .allSliderDiv{
         display: flex;
         justify-content: space-between;
-        flex-direction: column-reverse;
+        flex-direction: row-reverse;
         align-items: center;
         align-items: center;
         margin-top: 10%;

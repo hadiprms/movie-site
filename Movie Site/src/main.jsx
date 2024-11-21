@@ -12,6 +12,7 @@ import MovieDetail from './MovieDetails/movieDetail.jsx'
 import MainPageRouterFiles from './mainPageComponents/mainPageRouter/mainPageRouter.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ErrorHandler from './errorHandler/errorHandler.jsx'
+import WatchlistPage from './watchList/watchList.jsx'
 
 function Main() {
 
@@ -22,6 +23,7 @@ function Main() {
             <Routes>
                 <Route path="/" element={<MainPageRouterFiles />} />
                 <Route path="/movie/:movieId" element={<MovieDetail />} />
+                <Route path="/watchlist" element={<WatchlistPage />} /> 
                 <Route path="*" element={<ErrorHandler />}/>
             </Routes>
         </Router>
