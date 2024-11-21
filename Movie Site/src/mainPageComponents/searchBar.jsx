@@ -66,7 +66,7 @@ const Fetcher = () => {
             </div>
             {showResults && (
                 <ul className="searchResult"> 
-                    {data.slice(0, 4).map(movie => (
+                    {data.slice(0, 4).map((movie) => (
                         <li key={movie.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 10px' }}>
                             <Link to={`/movie/${movie.id}`}>
                                 <div className="searchResult-Info">

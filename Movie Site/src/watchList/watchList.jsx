@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';  
 import DataQuery from '../common/dataQuery';
-
+import './watchListCss/watchList.css'
 const WatchlistPage = () => {
     const [watchlist, setWatchlist] = useState([]);
     const [movies, setMovies] = useState([]);
@@ -34,32 +34,40 @@ const WatchlistPage = () => {
         } : null;
     };
 
+    const removeMovie = (movieId) => {
+        const updatedWatchlist = watchlist.filter(id => id !== movieId);
+        setWatchlist(updatedWatchlist);
+        localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
 
     return (
-        <div className="watchlist-container">
-            <h1>Your Watchlist</h1>
-            {watchlist.length === 0 ? (
-                <p>Your watchlist is empty. Start adding movies!</p>
-            ) : (
-                <ul>
-                    {watchlist.map((movieId) => {
-                        const movieDetails = getMovieDetails(movieId);
-                        return movieDetails ? (
-                            <li key={movieId}>
-                                <h3 style={{ color: 'white' }}>{movieDetails.title}</h3>
-                                <p style={{ color: 'white' }}>
-                                    {movieDetails.year} | Rating: {movieDetails.rating} / 10
-                                </p>
-                                {movieDetails.primaryImage && <img src={movieDetails.primaryImage} alt={movieDetails.title} style={{ width: '100px' }} />}  
-                            </li>
-                        ) : null;
-                    })}
-                </ul>
-            )}
-        </div>
+        <>
+            <h1 className='watchListTitle' style={{color:'white'}}>Your Watchlist</h1>
+            <div className="watchlist-container">
+                {watchlist.length === 0 ? (
+                    <p>Your watchlist is empty. Start adding movies!</p>
+                ) : (
+                    <ul>
+                        {watchlist.map((movieId) => {
+                            const movieDetails = getMovieDetails(movieId);
+                            return movieDetails ? (
+                                <div className='AllMoviesInfo' key={movieId}>
+                                    <div className='test'>
+                                    {movieDetails.primaryImage && <img src={movieDetails.primaryImage} alt={movieDetails.title} style={{ width: '100px' }} />} 
+                                    <h3 className='watchlistMovieTitle' style={{ color: 'white' }}>{movieDetails.title}</h3>
+                                    <button className='removeButton' onClick={() => removeMovie(movieId)}>Remove</button>
+                                    </div>
+                                </div>
+                            ) : null;
+                        })}
+                    </ul>
+                )}
+            </div>
+        </>
     );
 };
 
