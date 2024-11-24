@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import DataQuery from '../common/dataQuery';
 import './MovieDetailCss/movieDetail.css'
 import Fetcher from '../mainPageComponents/searchBar';
@@ -10,6 +11,12 @@ const MovieDetail = () => {
     const [movie, setMovie] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
+
+    const detailGoHome = () => {
+        navigate('/');
+    };
 
     useEffect(() => {
         const fetchMovieDetail = async () => {
@@ -22,6 +29,8 @@ const MovieDetail = () => {
                 setLoading(false);
             }
         };
+
+
 
         fetchMovieDetail();
     }, [movieId]);
@@ -41,6 +50,11 @@ const MovieDetail = () => {
     return (
         <div>
             <Fetcher />
+            <div>
+                <button onClick={detailGoHome} className='detailPageHomeButton'>
+                    Go to Main Page
+                </button>
+            </div>
             <div className='all-movieDetail'>
                 <div className='DetailImage'>
                     <img src={movie.primaryImage.url} alt="image" />
