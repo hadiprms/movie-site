@@ -58,6 +58,11 @@ const Fetcher = () => {
                 <div className="siteName">
                     <p>Best <span>Movies</span><img src="https://img.icons8.com/?size=100&id=11139&format=png&color=FD7E14" alt="image" /></p>  
                 </div>
+                <div className="watchlistButton">
+                <Link to="/watchlist">
+                    <button>View Watchlist</button>
+                </Link>
+            </div>
                 <div className="searchBar-inputAndButton">
                     <input  
                         type="text"  

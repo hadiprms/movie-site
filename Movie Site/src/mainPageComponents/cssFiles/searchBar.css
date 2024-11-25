@@ -1,14 +1,14 @@
 @media screen and (min-width:700px) {
     .searchBar-inputAndButton{
-        width: 100%;
+        /* width: 100%;
         max-width: 320px;
-        max-height: 40px;
+        max-height: 40px; */
         background-color: rgba(255, 255, 255, 0.2);
         display: flex;
         align-items: center;
         border-radius: 60px;
-        padding: 10px 10px;
-        margin: 25px 0 0 10px;
+        /* padding: 10px 10px;
+        margin: 25px 0 0 10px; */
     }
     .searchBar-inputAndButton input{
         background: transparent;
@@ -39,9 +39,8 @@
         font-size: 15px;
     }
     .siteName{
-        float: right;
-        margin-right: 1%;
-        margin-top: 0;
+        /* flex: 1; Allow siteName to take available space  */
+
     }
     .siteName span{
         color: white;
@@ -70,6 +69,10 @@
         height: 10%;
         background-color: #0c0b0b79;
         opacity: 0.7;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
     }
     .searchResult{
         display: flex;
