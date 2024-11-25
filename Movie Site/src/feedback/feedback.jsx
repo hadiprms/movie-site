@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography } from '@mui/material';
-import './footerLinksCss/feedback.css'
 
 const FeedbackForm = () => {
   const [feedback, setFeedback] = useState({
