@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';  
 import DataQuery from '../common/dataQuery';
+import { Link } from 'react-router-dom';
 import './watchListCss/watchList.css'
+
 const WatchlistPage = () => {
     const [watchlist, setWatchlist] = useState([]);
     const [movies, setMovies] = useState([]);
@@ -57,9 +59,11 @@ const WatchlistPage = () => {
                             return movieDetails ? (
                                 <div className='AllMoviesInfo' key={movieId}>
                                     <div className='test'>
-                                    {movieDetails.primaryImage && <img src={movieDetails.primaryImage} alt={movieDetails.title} style={{ width: '100px' }} />} 
-                                    <h3 className='watchlistMovieTitle' style={{ color: 'white' }}>{movieDetails.title}</h3>
-                                    <button className='removeButton' onClick={() => removeMovie(movieId)}>Remove</button>
+                                        <Link to={`/movie/${movieId}`}>
+                                            {movieDetails.primaryImage && <img src={movieDetails.primaryImage} alt={movieDetails.title} className='watchListImage' style={{ width: '100px' }} />} 
+                                            <h3 className='watchlistMovieTitle' style={{ color: 'white' }}>{movieDetails.title}</h3>
+                                            <button className='removeButton' onClick={() => removeMovie(movieId)}>Remove</button>
+                                        </Link>
                                     </div>
                                 </div>
                             ) : null;
