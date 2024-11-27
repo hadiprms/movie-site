@@ -3,7 +3,7 @@ export const searchMoviesFetch = async (query) => {
     const options = {  
         method: 'GET',  
         headers: {  
-            'x-rapidapi-key': '7e166b8202msh3a94c1a60b79768p1ed15djsnd81690b60456',  
+            'x-rapidapi-key': '0dd6d2924cmsh029dbcd6162f2b6p1eca82jsn4aa5d33ac167',  
             'x-rapidapi-host': 'imdb8.p.rapidapi.com'  
         }  
     };  
