@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';  
+import { Link } from 'react-router-dom';  
 import DataQuery from '../../common/dataQuery';
+
 
 const MovieList = () => {
     const [movies, setMovies] = useState([]);
@@ -9,7 +10,8 @@ const MovieList = () => {
     const [displayCount, setDisplayCount] = useState(21);
     const [watchlist, setWatchlist] = useState(JSON.parse(localStorage.getItem('watchlist')) || []);
     const [selectedGenre, setSelectedGenre] = useState('');
-    const [showMovies, setShowMovies] = useState(false); // New state to track if movies should be shown  
+    const [showMovies, setShowMovies] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility  
 
     const genres = ['Action', 'Drama', 'Comedy', 'Horror', 'Thriller', 'Romance']; // Define genres  
 
@@ -29,8 +31,8 @@ const MovieList = () => {
 
     const toggleMovieInWatchlist = (movieId) => {
         const updatedWatchlist = watchlist.includes(movieId)
-            ? watchlist.filter(id => id !== movieId) // Remove from watchlist   
-            : [...watchlist, movieId]; // Add to watchlist  
+            ? watchlist.filter(id => id !== movieId)
+            : [...watchlist, movieId];
             
         setWatchlist(updatedWatchlist);
         localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
@@ -58,26 +60,33 @@ const MovieList = () => {
 
     return (
         <div className='All-moviesReturn'>
-            <h1 className='titleHolder'>Filter By Genre:</h1>
+            <h1 className='titleHolder'>Most popular this week:</h1>
 
-            {/* Render genre buttons */}  
-            <div className="genre-buttons">
-                {genres.map((genre) => (
-                    <button
-                        key={genre}
-                        onClick={() => {
-                            setSelectedGenre(genre); // Set the selected genre on click  
-                            setShowMovies(true); // Show movies when a genre is clicked  
-                        }} // Update to show movies when genre is selected  
-                        className={selectedGenre === genre ? 'active' : ''} // Optional: highlight selected genre  
-                    >
-                        {genre}
-                    </button>
-                ))}
-                <button onClick={() => {
-                    setSelectedGenre(''); // Reset selected genre  
-                    setShowMovies(false); // Hide movies  
-                }}>Reset Filters</button> {/* Button to reset filters */}  
+            {/* Main dropdown for genre selection */}
+            <div
+                className='genre-dropdown'   
+                onMouseEnter={() => setIsDropdownOpen(true)}
+                onMouseLeave={() => setIsDropdownOpen(false)} // Close dropdown when mouse leaves  
+            >  
+                <button className="main-genre-button">
+                    Select Genre
+                </button>
+                {isDropdownOpen && ( // Render dropdown only when open  
+                    <div className="genre-options">
+                        {genres.map((genre) => (
+                            <button
+                                key={genre}
+                                onClick={() => {
+                                    setSelectedGenre(genre); // Set selected genre  
+                                    setShowMovies(true); // Show movies when genre is selected  
+                                    setIsDropdownOpen(false); // Close dropdown after selection  
+                                }}
+                            >
+                                {genre}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
 
             <div className='element'>
