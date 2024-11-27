@@ -14,6 +14,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ErrorHandler from './errorHandler/errorHandler.jsx'
 import WatchlistPage from './watchList/watchList.jsx'
 import FeedbackForm from './feedback/feedback.jsx'
+import MovieList from './mainPageComponents/MovieFilter/filteredMovies.jsx'
 
 function Main() {
 
@@ -26,6 +27,7 @@ function Main() {
                 <Route path="/movie/:movieId" element={<MovieDetail />} />
                 <Route path="/watchlist" element={<WatchlistPage />} /> 
                 <Route path="/feedback" element={<FeedbackForm/>}/>
+                <Route path="/movies/:genre" element={<MovieList/>} /> 
                 <Route path="*" element={<ErrorHandler />}/>
             </Routes>
         </Router>

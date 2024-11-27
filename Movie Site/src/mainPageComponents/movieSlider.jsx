@@ -94,7 +94,7 @@ const MovieSlider = () => {
                             <p className='sliderTitleText' style={{textAlign:'center'}}>{displayedMovies[0].node.titleText.text}</p>  
                             <p style={{textAlign:'center'}}>  
                                 {displayedMovies[0].node.releaseYear.year} | 
-                                <span className='ratingOfSlider'> {displayedMovies[0].node.ratingsSummary.aggregateRating} /10</span>  
+                                <span className='ratingOfSlider'> {displayedMovies[0].node.ratingsSummary.aggregateRating ?? '-'} /10</span>  
                             </p>
                         </div>  
                     )}  

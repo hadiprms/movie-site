@@ -71,7 +71,7 @@ const TopRatedMovies = () => {
                                     <p className='movieTitleText'>{movie.node.titleText.text}</p>
                                     <p>
                                         <span className='releaseYearOfMovies'>{movie.node.releaseYear.year} | </span>
-                                        <span className='ratingOfMovies'>{movie.node.ratingsSummary.aggregateRating} /10</span>
+                                        <span className='ratingOfMovies'>{movie.node.ratingsSummary.aggregateRating ?? '-'} /10</span>
                                     </p>
                                 </div>
                             </Link>
@@ -89,11 +89,6 @@ const TopRatedMovies = () => {
             {movies.length > displayCount && (
                 <button className='addMoreButton' onClick={loadMoreMovies}>Load More</button>
             )}
-            <div>
-                <Link to="/watchlist">
-                    <button>View Watchlist</button>
-                </Link>
-            </div>
         </div>  
     );  
 };  

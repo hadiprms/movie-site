@@ -2,6 +2,25 @@
     .all-movieDetail{
         color: white;
         display: flex;
+        margin-top: 8%;
+        min-height: 70vh;
+
+        position: relative;  
+        background-image: url('');
+        background-size: cover;
+        background-position: center;
+        padding: 20px;
+        color: white;
+    }
+    .all-movieDetail::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 1;
     }
     img{
         width: 80%;
@@ -11,9 +30,15 @@
     .DetailImage{
         width: 25%;
         margin-left: 1%;
+
+        position: relative;
+        z-index: 2;
     }
     .DetailDescription{
         width: 60%;
+
+        position: relative;
+        z-index: 3;
     }
     p{
         margin-top: 2%;
@@ -34,25 +59,74 @@
         text-align: justify;
         margin-bottom: 5%;
     }
-    .leftButton{
+    .watchOnlineButton{
         font-size: 20px;
         background-color: orange;
         text-align: center;
     }
-    .leftButton:hover{
+    .watchOnlineButton:hover{
         border-color: white;
         background-color: darkorange;
     }
-    .rightButton:hover{
+    .downloadNowButton:hover{
         border-color: white;
         background-color: darkorange;
     }
-    .rightButton{
-        margin-left: 3%;
+    .downloadNowButton{
         font-size: 20px;
         background-color: orange;
         text-align: center;
     }
+    .downloadBox{
+        display: grid;
+        background-color: #15192481;
+        margin-top: 1%;
+    }
+    .detailDownloadTitleHolder{
+        font-size: 20px;
+        font-weight: 700;
+    }
+    .watchOnlineButtonDiv{
+        display: flex;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+        background-color: #12181f;
+        justify-content: space-between;
+        padding: 10px;
+        margin-bottom: 1%;
+    }
+    .watchOnlineButtonDiv h2{
+        margin: auto 0;
+        color: white;
+    }
+    .downloadNowButtonDiv{
+        display: flex;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+        background-color: #12181f;
+        justify-content: space-between;
+        padding: 10px;
+        margin-bottom: 1%;
+    }
+    .downloadNowButtonDiv h2{
+        margin: auto 0;
+        color: white;
+    }
+    .detailDownloadTitleHolder{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+        margin-bottom: 1%;
+    }
+    .detailPageHomeButton{
+        z-index: 3;
+    }
+    
 }
 .loadingMassage{
     color: white;
@@ -64,6 +138,7 @@
     .all-movieDetail{
         color: white;
         display: flex;
+        margin: 13% 0;
     }
     img{
         width: 80%;
@@ -71,7 +146,7 @@
         border-radius: 10px;
     }
     .DetailImage{
-        width: 25%;
+        width: 50%;
         margin-left: 1%;
     }
     .DetailDescription{
@@ -96,26 +171,26 @@
         text-align: justify;
         margin-bottom: 5%;
     }
-    .leftButton{
+    .watchOnlineButton{
         font-size: 20px;
         background-color: orange;
         text-align: center;
     }
-    .leftButton:hover{
+    .watchOnlineButton:hover{
         border-color: white;
         background-color: darkorange;
     }
-    .rightButton:hover{
+    .downloadNowButton:hover{
         border-color: white;
         background-color: darkorange;
     }
-    .rightButton{
+    .downloadNowButton{
         font-size: 20px;
         margin-top: 5px;
         background-color: orange;
         text-align: center;
     }
-    .test{
+    .detailDownloadButtons{
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -123,5 +198,60 @@
     }
     h1{
         overflow: hidden;
+    }
+    .downloadBox{
+        display: grid;
+        background-color: #15192481;
+        margin-top: 1%;
+    }
+    .detailDownloadTitleHolder{
+        font-size: 20px;
+        font-weight: 700;
+    }
+    .watchOnlineButtonDiv{
+        display: flex;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+        background-color: #12181f;
+        justify-content: space-between;
+        padding: 10px;
+        margin-bottom: 1%;
+    }
+    .watchOnlineButtonDiv h2{
+        margin: auto 0;
+        color: white;
+        font-size: medium;
+    }
+    .downloadNowButtonDiv{
+        display: flex;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+        background-color: #12181f;
+        justify-content: space-between;
+        padding: 10px;
+        margin-bottom: 1%;
+    }
+    .downloadNowButtonDiv h2{
+        margin: auto 0;
+        color: white;
+        font-size: medium;
+    }
+    .detailDownloadTitleHolder{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+        margin-bottom: 1%;
+    }
+    .D-Title{
+        font-size: large;
+    }
+    .detailPageHomeButton{
+        font-size: xx-small;
+        padding: 5px;
     }
 }

@@ -46,37 +46,50 @@ const MovieDetail = () => {
     if (!movie) {
         return <div>No movie found.</div>;
     }
+    const runtimeMinutes = movie.runtime ? movie.runtime.seconds / 60 : "N/A";
+    const releaseYear = movie.releaseYear ? movie.releaseYear.year : "N/A";
+    const descriptionText = movie.alternateVersions?.edges.length > 0   
+    ? movie.alternateVersions.edges[0].node.text.plainText   
+    : 'None';
 
     return (
         <div>
             <Fetcher />
-            <div>
+            <div
+            className='all-movieDetail'
+            style={{ backgroundImage: `url(${movie.primaryImage?.url})` }}
+            >
+                <div className='DetailImage'>
+                    <img src={movie.primaryImage?.url} alt="image" />
+                </div>
+                <div className='DetailDescription'>
+                    <h1 className='D-Title'>{movie.titleText?.text || "Title not available"}</h1>
+                    <div className='D-YearAndTime'>
+                        <p>Release Year: {releaseYear}</p>
+                        <p className='D-Time'>{runtimeMinutes} Minutes</p>
+                    </div>
+                    <p className='D-MadeBy'>Made By: {movie.releaseDate?.country?.id || "Unknown"}</p>
+                    <p className='D-Description'>
+                        <span>Description:</span> {descriptionText}
+                    </p>
+                </div>
+                <div>
                 <button onClick={detailGoHome} className='detailPageHomeButton'>
                     Go to Main Page
                 </button>
             </div>
-            <div className='all-movieDetail'>
-                <div className='DetailImage'>
-                    <img src={movie.primaryImage.url} alt="image" />
+            </div>
+            <div className='downloadBox'>
+                <div className='detailDownloadTitleHolder'>
+                    <p>Download Box</p>
                 </div>
-                <div className='DetailDescription'>
-                    <h1 className='D-Title'>{movie.titleText.text}</h1>
-                    <div className='D-YearAndTime'>
-                        <p>Reales Year: {movie.releaseYear.year}</p>
-                        <p className='D-Time'>{movie.runtime.seconds/60} Minutes</p>
-                    </div>
-                    <p className='D-MadeBy'>Made By: {movie.releaseDate.country.id}</p>
-                    <p className='D-Description'>
-                    {movie.alternateVersions.edges.slice(0, 1).map((description) => (
-                        <div>
-                            <p><span>Descripton:</span> {description.node.text.plainText}</p>
-                        </div>
-                    ))}
-                    </p>
-                    <div className='test'>
-                        <button className='leftButton'>Watch it online</button>
-                        <button className='rightButton'>Download now</button>
-                    </div>
+                <div className='watchOnlineButtonDiv'>
+                    <button className='watchOnlineButton'>Watch it online</button>
+                    <h2>Web Online-4K</h2>
+                </div>
+                <div className='downloadNowButtonDiv'>
+                    <button className='downloadNowButton'>Download now</button>
+                    <h2>Web Dl-4K</h2>
                 </div>
             </div>
         </div>
