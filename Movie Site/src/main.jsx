@@ -15,6 +15,7 @@ import ErrorHandler from './errorHandler/errorHandler.jsx'
 import WatchlistPage from './watchList/watchList.jsx'
 import FeedbackForm from './feedback/feedback.jsx'
 import MovieList from './mainPageComponents/MovieFilter/filteredMovies.jsx'
+// import GenreForm from './mainPageComponents/MovieFilter/movieGenre.jsx'
 
 function Main() {
 
@@ -28,6 +29,7 @@ function Main() {
                 <Route path="/watchlist" element={<WatchlistPage />} /> 
                 <Route path="/feedback" element={<FeedbackForm/>}/>
                 <Route path="/movies/:genre" element={<MovieList/>} /> 
+                {/* <Route path="/genre" element={<GenreForm/>}/> */}
                 <Route path="*" element={<ErrorHandler />}/>
             </Routes>
         </Router>
@@ -40,7 +42,5 @@ export default Main;
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
     <App />
-  </StrictMode>,
 )

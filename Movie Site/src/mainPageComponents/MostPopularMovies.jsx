@@ -10,12 +10,21 @@ const TopRatedMovies = () => {
     const [error, setError] = useState(null);  
     const [displayCount, setDisplayCount] = useState(21);
     const [watchlist, setWatchlist] = useState(JSON.parse(localStorage.getItem('watchlist')) || []);
+    const [selectedGenre, setSelectedGenre] = useState('');
+    const [genres, setGenres] = useState([]);  // State to hold unique genres  
 
     useEffect(() => {  
         const fetchMovies = async () => {  
             try {  
                 const result = await DataQuery.fetchTopRatedMovies();
                 setMovies(result.data.movies.edges);
+                
+                // Extract unique genres from fetched movies  
+                const uniqueGenres = new Set();
+                result.data.movies.edges.forEach(movie => {
+                    movie.node.titleGenres.genres.forEach(g => uniqueGenres.add(g.genre.text));
+                });
+                setGenres(Array.from(uniqueGenres)); // Convert Set to Array for state  
             } catch (err) {  
                 setError(err.message || "Failed to fetch movies.");  
             } finally {  
@@ -27,8 +36,8 @@ const TopRatedMovies = () => {
 
     const toggleMovieInWatchlist = (movieId) => {
         const updatedWatchlist = watchlist.includes(movieId)
-            ? watchlist.filter(id => id !== movieId) // Remove from watchlist 
-            : [...watchlist, movieId]; // Add to watchlist
+            ? watchlist.filter(id => id !== movieId) // Remove from watchlist   
+            : [...watchlist, movieId]; // Add to watchlist  
             
         setWatchlist(updatedWatchlist);
         localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
@@ -42,16 +51,37 @@ const TopRatedMovies = () => {
         return watchlist.includes(movieId);
     };
 
+    const filterMoviesByGenre = (movies, genre) => {
+        return genre ? movies.filter(movie => movie.node.titleGenres.genres.some(g => g.genre.text === genre)) : movies;
+    };
+
     if (error) {  
         return <div>Error: {error}</div>;  
     }  
 
+    const filteredMovies = filterMoviesByGenre(movies, selectedGenre);
+
     return (  
         <div className='All-moviesReturn'>  
             <h1 className='titleHolder'>Most popular this week:</h1>
+
+            {/* Render dynamic genre buttons */}  
+            <div className="genre-buttons">
+                {genres.map((genre) => (
+                    <button
+                        key={genre}
+                        onClick={() => setSelectedGenre(genre)}
+                        className={selectedGenre === genre ? 'active' : ''}
+                    >
+                        {genre}
+                    </button>
+                ))}
+                <button onClick={() => setSelectedGenre('')}>Reset Filters</button>
+            </div>
+
             <div className='element'>
                 {loading && <MostPopularSkeleton cards={21} />}
-                {movies.slice(0, displayCount).map((movie) => {
+                {filteredMovies.slice(0, displayCount).map((movie) => {
                     const movieId = movie.node.id;
 
                     return (
@@ -78,7 +108,7 @@ const TopRatedMovies = () => {
                             <button className='ButtonRemove'
                                 type='button'
                                 onClick={() => toggleMovieInWatchlist(movieId)}
-                                style={{ backgroundColor: isMovieInWatchlist(movieId) ? 'red' : undefined }}
+                                style={{ backgroundColor: isMovieInWatchlist(movieId) ? 'red' : undefined }}  
                             >
                                 {isMovieInWatchlist(movieId) ? 'Remove Watchlist' : 'Add to Watchlist'}
                             </button>
@@ -86,7 +116,7 @@ const TopRatedMovies = () => {
                     );
                 })}
             </div>
-            {movies.length > displayCount && (
+            {filteredMovies.length > displayCount && (
                 <button className='addMoreButton' onClick={loadMoreMovies}>Load More</button>
             )}
         </div>  

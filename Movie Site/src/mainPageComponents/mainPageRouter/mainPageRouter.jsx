@@ -10,7 +10,7 @@ const MainPageRouterFiles = () => {
     return (
         <div>
             <MovieSlider />
-            <MovieList />
+            {/* <MovieList /> */}
             <TopRatedMovies />
             <Footer />
         </div>  
