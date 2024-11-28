@@ -14,7 +14,7 @@ const WatchlistPage = () => {
 
         const fetchMovies = async () => {
             try {
-                const result = await DataQuery.fetchTopRatedMovies();
+                const result = await DataQuery.fetchTopRatedMovies(42);
                 setMovies(result.data.movies.edges);
             } catch (err) {
                 console.error("Failed to fetch movies.", err);

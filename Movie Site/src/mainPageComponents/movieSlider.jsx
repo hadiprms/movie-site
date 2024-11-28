@@ -17,7 +17,7 @@ const MovieSlider = () => {
     useEffect(() => {  
         const fetchMovies = async () => {  
             try {  
-                const result = await DataQuery.fetchTopRatedMovies();  
+                const result = await DataQuery.fetchTopRatedMovies(10);  
                 setMovies(result.data.movies.edges);  
             } catch (err) {  
                 setError(err.message || "Failed to fetch movies.");  

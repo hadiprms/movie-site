@@ -17,7 +17,7 @@ const TopRatedMovies = () => {
     useEffect(() => {  
         const fetchMovies = async () => {  
             try {  
-                const result = await DataQuery.fetchTopRatedMovies();
+                const result = await DataQuery.fetchTopRatedMovies(42);
                 setMovies(result.data.movies.edges);
                 
                 // Extract unique genres from fetched movies  
