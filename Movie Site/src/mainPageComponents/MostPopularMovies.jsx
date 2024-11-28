@@ -12,6 +12,7 @@ const TopRatedMovies = () => {
     const [watchlist, setWatchlist] = useState(JSON.parse(localStorage.getItem('watchlist')) || []);
     const [selectedGenre, setSelectedGenre] = useState('');
     const [genres, setGenres] = useState([]);  // State to hold unique genres  
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility  
 
     useEffect(() => {  
         const fetchMovies = async () => {  
@@ -52,7 +53,7 @@ const TopRatedMovies = () => {
     };
 
     const filterMoviesByGenre = (movies, genre) => {
-        return genre ? movies.filter(movie => movie.node.titleGenres.genres.some(g => g.genre.text === genre)) : movies;
+        return genre ? movies.filter(movie => movie.node.titleGenres.genres.some(g => g.genre.text === genre)) : movies
     };
 
     if (error) {  
@@ -63,21 +64,46 @@ const TopRatedMovies = () => {
 
     return (  
         <div className='All-moviesReturn'>  
-            <h1 className='titleHolder'>Most popular this week:</h1>
+            <div className='titleHolder'>
+                <h2 style={{marginBottom: '1%'}}>Most popular this week:</h2>
 
-            {/* Render dynamic genre buttons */}  
-            <div className="genre-buttons">
-                {genres.map((genre) => (
-                    <button
-                        key={genre}
-                        onClick={() => setSelectedGenre(genre)}
-                        className={selectedGenre === genre ? 'active' : ''}
-                    >
-                        {genre}
-                    </button>
-                ))}
-                <button onClick={() => setSelectedGenre('')}>Reset Filters</button>
+            {/* Single button for dropdown genre selection */}  
+            <div
+                className="genre-dropdown"
+                onMouseEnter={() => setIsDropdownOpen(true)}
+                onMouseLeave={() => setIsDropdownOpen(false)}
+            >
+                <button className="main-genre-button">
+                    {selectedGenre || 'Select Genre'}
+                </button>
+                {isDropdownOpen && (
+                    <div className="genre-options">
+                        {genres.map((genre) => (
+                            <button
+                                key={genre}
+                                onClick={() => {
+                                    setSelectedGenre(genre);
+                                    setIsDropdownOpen(false); // Close dropdown after selection  
+                                }}
+                                className={'genre-button'}
+                            >
+                                {genre}
+                            </button>
+                        ))}
+                        <button
+                            className='genre-button'
+                            onClick={() => {
+                                setSelectedGenre('');
+                                setIsDropdownOpen(false); // Close dropdown after reset  
+                            }}
+                        >
+                            Reset Filters
+                        </button>
+                    </div>
+                )}
             </div>
+            </div>
+
 
             <div className='element'>
                 {loading && <MostPopularSkeleton cards={21} />}
