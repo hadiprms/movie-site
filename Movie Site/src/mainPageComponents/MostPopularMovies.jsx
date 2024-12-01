@@ -14,6 +14,7 @@ const TopRatedMovies = ({ movies }) => {
     const [genres, setGenres] = useState([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+
     useEffect(() => {
         const uniqueGenres = new Set();
         movies.forEach(movie => {

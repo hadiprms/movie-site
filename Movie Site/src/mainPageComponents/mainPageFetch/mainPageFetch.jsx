@@ -3,6 +3,7 @@ import DataQuery from '../../common/dataQuery';
 import TopRatedMovies from '../MostPopularMovies';
 import MovieSlider from '../movieSlider';
 import MostPopularSkeleton from '../skeletonFiles/MostPopularSkeleton';
+import Skeleton from 'react-loading-skeleton';
 
 const MoviesContainer = () => {
     const [movies, setMovies] = useState([]);
@@ -25,7 +26,10 @@ const MoviesContainer = () => {
     }, []);
 
     if (loading) {
-        return <MostPopularSkeleton cards={21} />; // Or any loading component  
+        return <div>
+            <Skeleton height={800} />
+            <MostPopularSkeleton cards={3} />
+        </div>
     }
 
     if (error) {
