@@ -111,9 +111,9 @@
         padding: 5%;
     }
 }
-.element{
-    justify-content: flex-start; /*change this for display of movies when have overflow in different pixels*/
-}
+/* .element{
+    justify-content: flex-start; change this for display of movies when have overflow in different pixels
+} */
 .genre-dropdown {
     position: relative;
     display: inline-block;

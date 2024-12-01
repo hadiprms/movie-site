@@ -1,115 +1,85 @@
-import React, { useEffect, useState } from 'react';  
+import React, { useEffect, useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';  
 import DataQuery from '../common/dataQuery';  
 import MostPopularSkeleton from './skeletonFiles/MostPopularSkeleton';  
 import './cssFiles/MostPopularMovies.css';  
+import { favoriteMoviesReducer, initialState } from './favoriteMoviesReducer';
 
-const TopRatedMovies = () => {  
-    const [movies, setMovies] = useState([]);  
-    const [loading, setLoading] = useState(true);  
-    const [error, setError] = useState(null);  
+const TopRatedMovies = ({ movies }) => {
+    const [state, dispatch] = useReducer(favoriteMoviesReducer, initialState);
+    const [loading, setLoading] = useState(false); // Remove loading state
+    const [error, setError] = useState(null);
     const [displayCount, setDisplayCount] = useState(21);
-    const [watchlist, setWatchlist] = useState(JSON.parse(localStorage.getItem('watchlist')) || []);
     const [selectedGenre, setSelectedGenre] = useState('');
-    const [genres, setGenres] = useState([]);  // State to hold unique genres  
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility  
+    const [genres, setGenres] = useState([]);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    useEffect(() => {  
-        const fetchMovies = async () => {  
-            try {  
-                const result = await DataQuery.fetchTopRatedMovies(42);
-                setMovies(result.data.movies.edges);
-                
-                // Extract unique genres from fetched movies  
-                const uniqueGenres = new Set();
-                result.data.movies.edges.forEach(movie => {
-                    movie.node.titleGenres.genres.forEach(g => uniqueGenres.add(g.genre.text));
-                });
-                setGenres(Array.from(uniqueGenres)); // Convert Set to Array for state  
-            } catch (err) {  
-                setError(err.message || "Failed to fetch movies.");  
-            } finally {  
-                setLoading(false);  
-            }  
-        };  
-        fetchMovies();
-    }, []);  
+    useEffect(() => {
+        const uniqueGenres = new Set();
+        movies.forEach(movie => {
+            movie.node.titleGenres.genres.forEach(g => uniqueGenres.add(g.genre.text));
+        });
+        setGenres(Array.from(uniqueGenres));
+    }, [movies]);
 
-    const toggleMovieInWatchlist = (movieId) => {
-        const updatedWatchlist = watchlist.includes(movieId)
-            ? watchlist.filter(id => id !== movieId) // Remove from watchlist   
-            : [...watchlist, movieId]; // Add to watchlist  
-            
-        setWatchlist(updatedWatchlist);
-        localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
+    const toggleMovieInFavorites = (movieId) => {
+        if (state.favorites.includes(movieId)) {
+            dispatch({ type: 'REMOVE_FAVORITE', payload: movieId });
+        } else {
+            dispatch({ type: 'ADD_FAVORITE', payload: movieId });
+        }
     };
 
-    const loadMoreMovies = () => {
-        setDisplayCount(prevCount => prevCount + 21);
-    };
+    const filteredMovies = selectedGenre
+        ? movies.filter(movie => movie.node.titleGenres.genres.some(g => g.genre.text === selectedGenre))
+        : movies;
 
-    const isMovieInWatchlist = (movieId) => {
-        return watchlist.includes(movieId);
-    };
-
-    const filterMoviesByGenre = (movies, genre) => {
-        return genre ? movies.filter(movie => movie.node.titleGenres.genres.some(g => g.genre.text === genre)) : movies
-    };
-
-    if (error) {  
-        return <div>Error: {error}</div>;  
-    }  
-
-    const filteredMovies = filterMoviesByGenre(movies, selectedGenre);
-
-    return (  
-        <div className='All-moviesReturn'>  
+    return (
+        <div className='All-moviesReturn'>
             <div className='titleHolder'>
-                <h2 style={{marginBottom: '1%'}}>Most popular this week:</h2>
+                <h2 style={{ marginBottom: '1%' }}>Most popular this week:</h2>
 
-            {/* Single button for dropdown genre selection */}  
-            <div
-                className="genre-dropdown"
-                onMouseEnter={() => setIsDropdownOpen(true)}
-                onMouseLeave={() => setIsDropdownOpen(false)}
-            >
-                <button className="main-genre-button">
-                    {selectedGenre || 'Select Genre'}
-                </button>
-                {isDropdownOpen && (
-                    <div className="genre-options">
-                        {genres.map((genre) => (
+                {/* Single button for dropdown genre selection */}  
+                <div
+                    className="genre-dropdown"
+                    onMouseEnter={() => setIsDropdownOpen(true)}
+                    onMouseLeave={() => setIsDropdownOpen(false)}
+                >
+                    <button className="main-genre-button">
+                        {selectedGenre || 'Select Genre'}
+                    </button>
+                    {isDropdownOpen && (
+                        <div className="genre-options">
+                            {genres.map((genre) => (
+                                <button
+                                    key={genre}
+                                    onClick={() => {
+                                        setSelectedGenre(genre);
+                                        setIsDropdownOpen(false); // Close dropdown after selection  
+                                    }}
+                                    className={'genre-button'}
+                                >
+                                    {genre}
+                                </button>
+                            ))}
                             <button
-                                key={genre}
+                                className='genre-button'
                                 onClick={() => {
-                                    setSelectedGenre(genre);
-                                    setIsDropdownOpen(false); // Close dropdown after selection  
+                                    setSelectedGenre('');
+                                    setIsDropdownOpen(false); // Close dropdown after reset  
                                 }}
-                                className={'genre-button'}
                             >
-                                {genre}
+                                Reset Filters
                             </button>
-                        ))}
-                        <button
-                            className='genre-button'
-                            onClick={() => {
-                                setSelectedGenre('');
-                                setIsDropdownOpen(false); // Close dropdown after reset  
-                            }}
-                        >
-                            Reset Filters
-                        </button>
-                    </div>
-                )}
+                        </div>
+                    )}
+                </div>
             </div>
-            </div>
-
 
             <div className='element'>
                 {loading && <MostPopularSkeleton cards={21} />}
                 {filteredMovies.slice(0, displayCount).map((movie) => {
                     const movieId = movie.node.id;
-
                     return (
                         <div className='element-div' key={movieId}>
                             <Link to={`/movie/${movieId}`} className='media'>
@@ -133,17 +103,17 @@ const TopRatedMovies = () => {
                             </Link>
                             <button className='ButtonRemove'
                                 type='button'
-                                onClick={() => toggleMovieInWatchlist(movieId)}
-                                style={{ backgroundColor: isMovieInWatchlist(movieId) ? 'red' : undefined }}  
+                                onClick={() => toggleMovieInFavorites(movieId)}
+                                style={{ backgroundColor: state.favorites.includes(movieId) ? 'red' : undefined }}
                             >
-                                {isMovieInWatchlist(movieId) ? 'Remove Watchlist' : 'Add to Watchlist'}
+                                {state.favorites.includes(movieId) ? 'Remove from Favorites' : 'Add to Favorites'}
                             </button>
                         </div>
                     );
                 })}
             </div>
             {filteredMovies.length > displayCount && (
-                <button className='addMoreButton' onClick={loadMoreMovies}>Load More</button>
+                <button className='addMoreButton' onClick={() => setDisplayCount(prevCount => prevCount + 21)}>Load More</button>
             )}
         </div>  
     );  
