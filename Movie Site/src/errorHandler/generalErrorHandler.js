@@ -1,22 +1,30 @@
 export function GeneralErrorHandler(error) {
     let customMessage;
- 
+
     switch (true) {
         case error.message.includes("429"):
-            customMessage = "The API Used To Much. Change The Key";
+            customMessage = "The API Used Too Much. Change The Key";
             break;
         case error.message.includes("500"):
             customMessage = "Internal server error: Please try again later.";
             break;
-        // Add more cases for other error types if needed  
+        case error.message.includes("404"):
+            break;
         default:
             customMessage = "An unexpected error occurred. Please try again.";
             break;
     }  
 
-    // Log the original error for debugging purposes  
+    // Log the original error for debugging purposes
     console.error("Original error:", error);
 
-    // Send or display the custom message to the user  
-    alert(customMessage);
+    // Create or update the <h1> element in the document
+    let errorHeading = document.getElementById('error-heading');
+    if (!errorHeading) {
+        errorHeading = document.createElement('h1');
+        errorHeading.id = 'error-heading';
+        document.body.appendChild(errorHeading);
+    }
+    // Set the custom message as the text of the <h1> element  
+    errorHeading.textContent = customMessage;
 }
