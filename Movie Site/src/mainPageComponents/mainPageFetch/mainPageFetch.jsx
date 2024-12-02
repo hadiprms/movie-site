@@ -4,8 +4,9 @@ import TopRatedMovies from '../MostPopularMovies';
 import MovieSlider from '../movieSlider';
 import MostPopularSkeleton from '../skeletonFiles/MostPopularSkeleton';
 import Skeleton from 'react-loading-skeleton';
+import Footer from '../footer';
 
-const MoviesContainer = () => {
+const MainPageFetchCall = () => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -26,22 +27,22 @@ const MoviesContainer = () => {
     }, []);
 
     if (loading) {
-        return <div>
-            <Skeleton height={800} />
-            <MostPopularSkeleton cards={3} />
+        return <div style={{color: 'white'}}>
+                <Skeleton height={800}/>
         </div>
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div></div>;
     }
 
     return (
         <div>
             <MovieSlider movies={movies} />
-            <TopRatedMovies movies={movies} />
+            <TopRatedMovies movies={movies} loading={loading}/>
+            <Footer />
         </div>
     );
 };
 
-export default MoviesContainer;
+export default MainPageFetchCall;

@@ -3,17 +3,17 @@ import MovieSlider from '../movieSlider';
 import TopRatedMovies from '../MostPopularMovies';
 import Footer from '../footer';
 import MovieList from '../MovieFilter/filteredMovies';
-import MoviesContainer from '../mainPageFetch/mainPageFetch';
+import MainPageFetchCall from '../mainPageFetch/mainPageFetch';
 
 const MainPageRouterFiles = () => {
 
             {/* <MovieList /> */}
     return (
         <div>
-            <MoviesContainer />
+            <MainPageFetchCall />
             {/* <MovieSlider />
             <TopRatedMovies /> */}
-            <Footer />
+            {/* <Footer /> */}
         </div>  
     );
 };
