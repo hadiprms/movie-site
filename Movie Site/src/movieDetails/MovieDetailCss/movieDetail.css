@@ -124,6 +124,7 @@
         margin-bottom: 1%;
     }
     .detailPageHomeButton{
+        position: relative;
         z-index: 3;
     }
     
@@ -251,6 +252,7 @@
         font-size: large;
     }
     .detailPageHomeButton{
+        position: relative;
         font-size: xx-small;
         padding: 5px;
     }

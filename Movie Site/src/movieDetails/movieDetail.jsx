@@ -5,6 +5,7 @@ import DataQuery from '../common/dataQuery';
 import './MovieDetailCss/movieDetail.css'
 import Fetcher from '../mainPageComponents/searchBar';
 import Footer from '../mainPageComponents/footer';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const MovieDetail = () => {
     const { movieId } = useParams();
@@ -36,7 +37,7 @@ const MovieDetail = () => {
     }, [movieId]);
 
     if (loading) {
-        return <div className='loadingMassage'>Loading...</div>;
+        return <div className='loadingMassage'><CircularProgress />  </div>;
     }
 
     if (error) {  
