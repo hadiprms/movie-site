@@ -3,6 +3,8 @@ import DataQuery from '../common/dataQuery';
 import { Link } from 'react-router-dom';  
 import './watchListCss/watchList.css';  
 import { favoriteMoviesReducer, initialState } from '../mainPageComponents/favoriteMoviesReducer';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const WatchlistPage = () => {  
     const [state, dispatch] = useReducer(favoriteMoviesReducer, initialState);  
@@ -39,7 +41,7 @@ const WatchlistPage = () => {
     };  
 
     if (loading) {  
-        return <div>Loading...</div>;  
+        return <div className='loadingMassage'><CircularProgress /></div>;  
     }  
 
     return (  
