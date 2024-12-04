@@ -5,6 +5,7 @@ import MovieSlider from '../movieSlider';
 import MostPopularSkeleton from '../skeletonFiles/MostPopularSkeleton';
 import Skeleton from 'react-loading-skeleton';
 import Footer from '../footer';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const MainPageFetchCall = () => {
     const [movies, setMovies] = useState([]);
@@ -28,7 +29,7 @@ const MainPageFetchCall = () => {
 
     if (loading) {
         return <div style={{color: 'white'}}>
-                <Skeleton height={800}/>
+            <div className='loadingMassage'><CircularProgress />  </div>
         </div>
     }
 
