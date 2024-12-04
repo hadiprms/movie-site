@@ -5,7 +5,6 @@ import './watchListCss/watchList.css';
 import { favoriteMoviesReducer, initialState } from '../mainPageComponents/favoriteMoviesReducer';
 import CircularProgress from '@mui/material/CircularProgress';
 
-
 const WatchlistPage = () => {  
     const [state, dispatch] = useReducer(favoriteMoviesReducer, initialState);  
     const [movies, setMovies] = useState([]);  
@@ -35,9 +34,10 @@ const WatchlistPage = () => {
             rating: movie.node.ratingsSummary.aggregateRating,  
         } : null;  
     };  
-
+    
     const removeFavorite = (movieId) => {  
         dispatch({ type: 'REMOVE_FAVORITE', payload: movieId });  
+        setMovies((prevMovies) => prevMovies.filter(m => m.node.id !== movieId)); // Update state directly  
     };  
 
     if (loading) {  
