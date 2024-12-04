@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import Fetcher from '../mainPageComponents/searchBar';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './errorHandleCss/errorHandle.css'
 

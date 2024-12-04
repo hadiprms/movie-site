@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import DataQuery from '../common/dataQuery';
 import './MovieDetailCss/movieDetail.css'
 import Fetcher from '../mainPageComponents/searchBar';
-import Footer from '../mainPageComponents/footer';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const MovieDetail = () => {

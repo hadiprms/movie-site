@@ -1,14 +1,10 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';  
-import DataQuery from '../common/dataQuery';  
-import MostPopularSkeleton from './skeletonFiles/MostPopularSkeleton';  
 import './cssFiles/MostPopularMovies.css';  
 import { favoriteMoviesReducer, initialState } from './favoriteMoviesReducer';
 
 const TopRatedMovies = ({ movies }) => {
     const [state, dispatch] = useReducer(favoriteMoviesReducer, initialState);
-    const [loading, setLoading] = useState(false); // Remove loading state
-    const [error, setError] = useState(null);
     const [displayCount, setDisplayCount] = useState(21);
     const [selectedGenre, setSelectedGenre] = useState('');
     const [genres, setGenres] = useState([]);
@@ -78,7 +74,6 @@ const TopRatedMovies = ({ movies }) => {
             </div>
 
             <div className='element'>
-                {loading && <MostPopularSkeleton cards={21} />}
                 {filteredMovies.slice(0, displayCount).map((movie) => {
                     const movieId = movie.node.id;
                     return (

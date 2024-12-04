@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import DataQuery from '../../common/dataQuery';
 import TopRatedMovies from '../MostPopularMovies';
 import MovieSlider from '../movieSlider';
-import MostPopularSkeleton from '../skeletonFiles/MostPopularSkeleton';
-import Skeleton from 'react-loading-skeleton';
 import Footer from '../footer';
 import CircularProgress from '@mui/material/CircularProgress';
 

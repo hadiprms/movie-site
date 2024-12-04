@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react';  
-import DataQuery from '../common/dataQuery';  
 import { Link } from 'react-router-dom';
 import './cssFiles/MovieSlider.css';  
 import Fetcher from './searchBar';
-import MostPopularSkeleton from './skeletonFiles/MostPopularSkeleton';
-import Skeleton from 'react-loading-skeleton';
 
 const MovieSlider = ({ movies }) => {
-    const [loading, setLoading] = useState(false); // Remove loading state  
-    const [error, setError] = useState(null);  
     const [currentIndex, setCurrentIndex] = useState(0);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -28,9 +23,6 @@ const MovieSlider = ({ movies }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    if (error) {  
-        return <div>Error: {error}</div>;  
-    }  
 
     const displayedMovies = [  
         ...movies.slice(currentIndex, currentIndex + 4),  
