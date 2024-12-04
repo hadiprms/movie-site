@@ -32,7 +32,7 @@ const Fetcher = () => {
     useEffect(() => {
         const handler = setTimeout(() => {
             fetchData(query);
-        }, 300);
+        }, 1000);
 
         return () => {
             clearTimeout(handler);
@@ -56,7 +56,9 @@ const Fetcher = () => {
         <div style={{ position: 'relative' }} ref={searchRef}>
             <div className="siteNameAndInput">
                 <div className="siteName">
+                    <Link to="/">
                     <p>Best <span>Movies</span><img src="https://img.icons8.com/?size=100&id=11139&format=png&color=FD7E14" alt="image" /></p>  
+                    </Link>
                 </div>
                 <div className="watchlistButton">
                 <Link to="/watchlist">
