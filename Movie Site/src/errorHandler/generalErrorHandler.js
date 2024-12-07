@@ -10,6 +10,9 @@ export function GeneralErrorHandler(error) {
             break;
         case error.message.includes("404"):
             break;
+        case error.message.includes("403"):
+            customMessage = "Unvalid Token, Check Your Key";
+            break;
         default:
             customMessage = "An unexpected error occurred. Please try again.";
             break;
