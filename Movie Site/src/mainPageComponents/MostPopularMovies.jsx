@@ -90,7 +90,7 @@ const TopRatedMovies = ({ movies }) => {
                                     </div>
                                 </div>
                                 <div className='movieInfoHolder'>
-                                    <p className='movieTitleText'>{movie.node.titleText.text}</p>
+                                    <p className='movieTitleText' data-testid={`movie-title-${movie.node.id}`}>{movie.node.titleText.text}</p>
                                     <p>
                                         <span className='releaseYearOfMovies'>{movie.node.releaseYear.year} | </span>
                                         <span className='ratingOfMovies'>{movie.node.ratingsSummary.aggregateRating ?? '-'} /10</span>
@@ -99,6 +99,7 @@ const TopRatedMovies = ({ movies }) => {
                             </Link>
                             <button className='ButtonRemove'
                                 type='button'
+                                data-testid={`favorite-button-${movieId}`} //for testing component
                                 onClick={() => toggleMovieInFavorites(movieId)}
                                 style={{ backgroundColor: state.favorites.includes(movieId) ? 'red' : undefined }}
                             >

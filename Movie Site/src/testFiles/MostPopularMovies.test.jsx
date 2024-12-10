@@ -1,114 +1,90 @@
-// TopRatedMovies.test.js  
-
-import React from 'react';  
-import { render, screen, fireEvent } from '@testing-library/react'; 
-import { MemoryRouter } from 'react-router-dom'; 
-import TopRatedMovies from '../mainPageComponents/MostPopularMovies';  
-import { favoriteMoviesReducer, initialState } from '../mainPageComponents/favoriteMoviesReducer';  
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import TopRatedMovies from '../mainPageComponents/MostPopularMovies';
+import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom/vitest';
-import { describe, it, expect, beforeEach } from 'vitest';  
 
-// Mocking the data to be passed into the TopRatedMovies component  
-const mockMovies = [  
-    {  
-        node: {  
-            id: "1",  
-            titleText: { text: "Movie One" },  
-            primaryImage: { url: "http://image1.jpg" },  
-            releaseYear: { year: 2022 },  
-            ratingsSummary: { aggregateRating: 8.5 },  
-            titleGenres: { genres: [{ genre: { text: "Action" } }] },  
-        },  
-    },  
-    {  
-        node: {  
-            id: "2",  
-            titleText: { text: "Movie Two" },  
-            primaryImage: { url: "http://image2.jpg" },  
-            releaseYear: { year: 2023 },  
-            ratingsSummary: { aggregateRating: 9.0 },  
-            titleGenres: { genres: [{ genre: { text: "Drama" } }] },  
-        },  
-    },  
-];  
+const mockMovies = [
+  {
+    node: {
+      id: '1',
+      primaryImage: { url: 'https://via.placeholder.com/150' },
+      titleGenres: { genres: [{ genre: { text: 'Action' } }] },
+      titleText: { text: 'Movie 1' },
+      releaseYear: { year: 2021 },
+      ratingsSummary: { aggregateRating: 7.5 },
+    },
+  },
+  {
+    node: {
+      id: '2',
+      primaryImage: { url: 'https://via.placeholder.com/150' },
+      titleGenres: { genres: [{ genre: { text: 'Comedy' } }] },
+      titleText: { text: 'Movie 2' },
+      releaseYear: { year: 2022 },
+      ratingsSummary: { aggregateRating: 8.0 },
+    },
+  },
+  {
+    node: {
+      id: '3',
+      primaryImage: { url: 'https://via.placeholder.com/150' },
+      titleGenres: { genres: [{ genre: { text: 'Drama' } }] },
+      titleText: { text: 'Movie 3' },
+      releaseYear: { year: 2020 },
+      ratingsSummary: { aggregateRating: 6.9 },
+    },
+  },
+];
 
-describe('TopRatedMovies Component Tests', () => {  
+describe('TopRatedMovies Component', () => {
+  it('renders correctly with movie data', () => {
+    render(
+      <MemoryRouter>
+        <TopRatedMovies movies={mockMovies} />
+      </MemoryRouter>
+    );
 
-    test('renders movies correctly', () => {  
-        render( 
-                <TopRatedMovies movies={mockMovies} />  
-        );  
+    expect(screen.getByTestId('movie-title-1')).toBeInTheDocument();
+    expect(screen.getByTestId('movie-title-2')).toBeInTheDocument();
+    expect(screen.getByTestId('movie-title-3')).toBeInTheDocument();
+  });
 
-        // Check if the movie titles are rendered  
-        expect(screen.getByText(/Movie One/i)).toBeInTheDocument();  
-        expect(screen.getByText(/Movie Two/i)).toBeInTheDocument();  
-    });  
+  it('handles adding/removing a movie to/from favorites', () => {
+    render(
+      <MemoryRouter>
+        <TopRatedMovies movies={mockMovies} />
+      </MemoryRouter>
+    );
 
-    // test('filters movies by selected genre', () => {  
-    //     render(  
-    //         <MemoryRouter>  
-    //             <TopRatedMovies movies={mockMovies} />  
-    //         </MemoryRouter>  
-    //     );  
+    // Select buttons with `data-testid`
+    const movie1Button = screen.getByTestId('favorite-button-1');
+    const movie2Button = screen.getByTestId('favorite-button-2');
+    const movie3Button = screen.getByTestId('favorite-button-3');
 
-    //     // Select the genre "Action" from the dropdown  
-    //     fireEvent.change(screen.getByRole('combobox'), { target: { value: 'Action' } });  
-        
-    //     // Ensure only Action movies are displayed  
-    //     expect(screen.getByText(/Movie One/i)).toBeInTheDocument();  
-    //     expect(screen.queryByText(/Movie Two/i)).toBeNull();  
-    // });  
+    expect(movie1Button).toBeInTheDocument();
+    expect(movie2Button).toBeInTheDocument();
+    expect(movie3Button).toBeInTheDocument();
 
-    // test('adds movie to favorites', () => {  
-    //     render(  
-    //         <MemoryRouter>  
-    //             <TopRatedMovies movies={mockMovies} />  
-    //         </MemoryRouter>  
-    //     );  
+    // Test clicking on Movie 1's favorite button
+    fireEvent.click(movie1Button);
+    expect(movie1Button).toHaveTextContent('Remove from Favorites');
 
-    //     // Example for adding to favorites - you need a button or similar in your component for the test to validate  
-    //     fireEvent.click(screen.getByRole('button', { name: /Add to Favorites/i }));  
+    fireEvent.click(movie1Button);
+    expect(movie1Button).toHaveTextContent('Add to Favorites');
 
-    //     // Check if the button changes to 'Remove from Favorites' (this assumes such a functionality is implemented)  
-    //     expect(screen.getByText(/Remove from Favorites/i)).toBeInTheDocument();  
-    // });  
+    // Test Movie 2's button
+    fireEvent.click(movie2Button);
+    expect(movie2Button).toHaveTextContent('Remove from Favorites');
 
-    // test('removes movie from favorites', () => {  
-    //     render(  
-    //         <MemoryRouter>  
-    //             <TopRatedMovies movies={mockMovies} />  
-    //         </MemoryRouter>  
-    //     );  
+    fireEvent.click(movie2Button);
+    expect(movie2Button).toHaveTextContent('Add to Favorites');
 
-    //     // Add Movie One to favorites  
-    //     fireEvent.click(screen.getByRole('button', { name: /Add to Favorites/i }));  
+    // Test Movie 3's button
+    fireEvent.click(movie3Button);
+    expect(movie3Button).toHaveTextContent('Remove from Favorites');
 
-    //     // Then remove it  
-    //     fireEvent.click(screen.getByText(/Remove from Favorites/i));  
-
-    //     // Check to see if the button changes back  
-    //     expect(screen.getByText(/Add to Favorites/i)).toBeInTheDocument();  
-    // });  
-
-    // test('renders loading state correctly', () => {  
-    //     const { rerender } = render(  
-    //         <MemoryRouter>  
-    //             <TopRatedMovies movies={[]} />  
-    //         </MemoryRouter>  
-    //     );  
-
-    //     // Initially no movies should be displayed  
-    //     expect(screen.queryByText(/Movie One/i)).toBeNull();  
-        
-    //     // Rerender with mock movies  
-    //     rerender(  
-    //         <MemoryRouter>  
-    //             <TopRatedMovies movies={mockMovies} />  
-    //         </MemoryRouter>  
-    //     );  
-
-    //     // Ensure movies render after loading  
-    //     expect(screen.getByText(/Movie One/i)).toBeInTheDocument();  
-    // });  
-
-});  
+    fireEvent.click(movie3Button);
+    expect(movie3Button).toHaveTextContent('Add to Favorites');
+  });
+});
